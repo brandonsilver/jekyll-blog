@@ -2,7 +2,9 @@
 layout: post
 title: The Dawn of a New Blog
 ---
+## {{ page.title }}
+### 02 Februrary 2011
 
-After reading about Jekyll at [Paul Stamatiou's Blog](http://paulstamatiou.com/how-to-wordpress-to-jekyll), I thought that maybe I'd give it a try. I needed more experience in XHTML/CSS, and the idea of having everything in markdown sans-database was too attractive to pass over. 
+I first learned about Jekyll from [Paul Stamatiou's Blog](http://paulstamatiou.com/how-to-wordpress-to-jekyll). Its support for a variety of markup languages (including markdown) and lack of a requirement for a database sold me on the idea. I have long desired a completely "flat" replacement for Wordpress, and Jekyll looked like just the ticket.
 
-It wasn't too dificult a process. I more or less followed along Paul's excellent post, creating a local development environment and using Github to clone a popular [Jekyll repository](https://github.com/mojombo/tpw), modifying it and the XHTML template I found as needed. And then, presto! Here we are.
+The initial setup wasn't too dificult. Even with my somewhat limited understanding of web development, I was able to follow along Paul's excellent post, creating a local development environment and using Github to clone a popular [Jekyll repository](https://github.com/mojombo/tpw). A few dozen modifications later, and a new blog is born in lightweight and beautiful static HTML.
