@@ -37,7 +37,7 @@ body {
 	margin: 10px auto
 }
 .content {
-	float: left;
+	float: right;
 	width: 510px;
 	text-align: justify;
 	padding: 0 30px 0 30px;
@@ -47,7 +47,7 @@ body {
 	width: 139px;
 	float: right;
 	padding: 0 20px 0 20px;
-	border-left: #8C8484 1px solid;
+	border-right: #8C8484 1px solid;
 	font-size: 12px
 }
 .menu ul {
