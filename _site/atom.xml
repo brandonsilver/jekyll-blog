@@ -3,7 +3,7 @@
  <title>BrandonSilver.com</title>
  <link href="http://www.brandonsilver.com/atom.xml" rel="self"/>
  <link href="http://www.brandonsilver.com/"/>
- <updated>2011-02-22T06:44:11-06:00</updated>
+ <updated>2011-02-24T21:22:54-06:00</updated>
  <id>http://www.brandonsilver.com/</id>
  <author>
    <name>Brandon Silver</name>
@@ -16,11 +16,7 @@
    <link href="http://www.brandonsilver.com/2011/02/08/the-dawn-of-a-new-blog.html"/>
    <updated>2011-02-08T00:00:00-06:00</updated>
    <id>http://www.brandonsilver.com/2011/02/08/the-dawn-of-a-new-blog</id>
-   <content type="html">&lt;h2&gt;The Dawn of a New Blog&lt;/h2&gt;
-
-&lt;h3&gt;8 Februrary 2011&lt;/h3&gt;
-
-&lt;p&gt;Another day, another new blog setup. As you may or may not have noticed, I've switched from Wordpress to a new, more lightweight system called Jekyll. It'll allow me the freedom to write up my posts how I see fit and (hopefully) finally give me the motivation to learn some HTML and CSS.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Another day, another new blog setup. As you may or may not have noticed, I've switched from Wordpress to a new, more lightweight system called Jekyll. It'll allow me the freedom to write up my posts how I see fit and (hopefully) finally give me the motivation to learn some HTML and CSS.&lt;/p&gt;
 
 &lt;p&gt;I first learned about Jekyll from &lt;a href=&quot;http://paulstamatiou.com/how-to-wordpress-to-jekyll&quot;&gt;Paul Stamatiou's Blog&lt;/a&gt;. Its support for a variety of markup languages (including markdown) and lack of a requirement for a database sold me on the idea. I have long desired a completely &quot;flat&quot; replacement for Wordpress, and Jekyll looked like just the ticket.&lt;/p&gt;
 

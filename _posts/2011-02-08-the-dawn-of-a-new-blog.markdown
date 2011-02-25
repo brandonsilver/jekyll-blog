@@ -2,8 +2,6 @@
 layout: post
 title: The Dawn of a New Blog
 ---
-## {{ page.title }}
-### 8 Februrary 2011
 
 Another day, another new blog setup. As you may or may not have noticed, I've switched from Wordpress to a new, more lightweight system called Jekyll. It'll allow me the freedom to write up my posts how I see fit and (hopefully) finally give me the motivation to learn some HTML and CSS. 
 
