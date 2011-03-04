@@ -1,1 +1,1 @@
-So, this is the git repo for my blog. Yeah. Feel free to work off of it if you want, but be aware that I retain all copyright to the individual posts (under _posts). OH, and yes, I realize I'm not "committing" in high enough detail. I'll try to do better about that ;)
+So, this is the git repo for my blog. Yeah. Feel free to work off of it if you want, but be aware that I retain all copyright to the individual posts (under _posts and _drafts). OH, and yes, I realize I'm not "committing" in high enough detail. I'll try to do better about that ;)
