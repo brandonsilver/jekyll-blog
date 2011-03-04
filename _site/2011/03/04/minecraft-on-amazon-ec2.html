@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="The personal website of Brandon Silver." />
+<meta name="keywords" content="photography unix networking photography" />
+	<title>Brandon Silver.com</title>
+<link rel="stylesheet" href="/css/style.css" type="text/css" />
+<link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+</head>
+
+<body>
+
+<div id="container">
+
+<div id="header"><h1><a href="http://www.brandonsilver.com">Brandon Silver.com</a></h1></div>
+
+<div id="sub_header">... writings and miscellaneous musings</div>
+
+<div id="main_content_top"></div>
+
+<div id="main_content">
+
+<div class="content">
+
+<h2> Minecraft Server on an Amazon EC2 Micro Instance </h2>
+<h3> 04 March 2011 </h3>
+
+<p>Over the past couple of weeks, I've been using my free Amazon EC2 Micro instance as a <a href="http://www.minecraft.net">Minecraft</a> server. It isn't ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience.</p>
+
+<h3>Setup</h3>
+
+<p><em>(This post assumes that you already have a running instance. If you are interested in setting up your own EC2 Instance from scratch, have a look at <a href="http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/">http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/</a>. It also shows you how to setup an OpenVPN server.)</em></p>
+
+<p>As it is my first Minecraft server, I decided to use the vanilla server from <a href="http://www.minecraft.net/download.jsp">Mojang Specifications</a>. It isn't as feature-packed as others like HeyO, but it is relatively simple to get going. My instance (Ubuntu Server 10.04, ami-4a0df923 on EC2) didn't have the Java Runtime Environment pre-installed, so I installed it using apt-get:</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">sudo apt-get install openjdk-6-jre-headless</span>
+</code></pre>
+</div>
+
+
+<p>I then proceeded to download the latest version of the server:</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859 minecraft-server.jar</span>
+</code></pre>
+</div>
+
+
+<p>At this point, I also made sure that <a href="http://www.gnu.org/software/screen/">GNU screen</a> was installed so I could run minecraft-server in the background between SSH sessions.</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">sudo apt-get install screen</span>
+</code></pre>
+</div>
+
+
+<p>Since I am running the server in a low-memory environment, I adjusted the instructions given on the <a href="http://www.minecraft.net/download.jsp">download page</a> to suit and put it all in a small startup script, start.sh, which I placed in the same directory as minecraft-server.jar:</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c">#!/bin/bash</span>
+<span class="c"># Minecraft Server startup script</span>
+java -Xmx500M -Xms500M -jar minecraft-server.jar nogui
+</code></pre>
+</div>
+
+
+<p>This should allow the server to startup without error. Make sure that start.sh has executable permissions via <code>chmod +x start.sh</code> .</p>
+
+<p>Now it's time to start the server with the following commands, replacing <code>/path/to/minecraft-server</code> with whatever path you downloaded minecraft-server.jar to:</p>
+
+<div class="highlight"><pre><code class="console"><span class="go">screen -DR</span>
+<span class="go">cd /path/to/minecraft-server</span>
+<span class="go">./start.sh</span>
+</code></pre>
+</div>
+
+
+<p>You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server's public IP address.</p>
+
+<h3>Practicality</h3>
+
+<p>The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it's only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the <a href="http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud">guide</a> at Stratum Security, you'll have a nice little OpenVPN server too.</p>
+ 
+
+</div>
+
+<div class="menu">
+<div class="menu_title">Main menu</div>
+<ul>
+<li><a href="/index.html" class="menu_link">Home</a></li>
+<li><a href="/contactme.html" class="menu_link">Contact me</a></li>
+<li><a href="/atom.xml" class="menu_link">Subscribe via RSS!</a></li>
+</ul>
+<div class="menu_title">Links</div>
+<ul>
+<li><a href="http://www.oswd.org" class="menu_link">OSWD</a></li>
+<li><a href="http://www.silverimaging.net" class="menu_link">Silver Imaging</a></li>
+<li><a href="http://daringfireball.net" class="menu_link">Daring Fireball</a></li>
+</ul>
+</div>
+
+<div id="clear"></div>
+
+</div>
+
+<div id="main_content_bottom">
+</div>
+
+<div id="footer"><strong>Copyright &copy; 2010-2011 <a href="http://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> Fri Mar 04 17:45:09 -0600 2011 </strong>
+</div>
+</div>
+</body>
+
+</html>
