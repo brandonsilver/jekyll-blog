@@ -31,6 +31,9 @@ body {
 	height: 30px;
 	background: #FFFFFF url('images/background_bottom.gif');
 }
+#disqus_thread {
+	background: #FFFFFF;
+}
 #footer {
 	text-align: center;
 	font-size: 12px;
