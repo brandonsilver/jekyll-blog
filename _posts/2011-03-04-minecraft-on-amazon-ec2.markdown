@@ -49,4 +49,4 @@ You should now be at the minecraft server console. For the final step, you need 
 
 ### Practicality ###
 
-The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it's only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the [guide](http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud) at Stratum Security, you'll have a nice little OpenVPN server too. 
+The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it's only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the [guide](http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud) at Stratum Security, you'll have a nice little OpenVPN server too.

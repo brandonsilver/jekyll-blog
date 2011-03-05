@@ -1,8 +1,9 @@
 ---
 layout: default
 ---
-<h2> {{ page.title }} </h2>
-<h3> {{ page.date | date: "%d %B %Y" }} </h3>
+<span class="post_date"> {{ page.date | date: "%d %B %Y" }} </span>
+<h2><a href=" {{ post.url }} "> {{ page.title }} </a></h2>
+
 
 {{ content }}
 
@@ -12,8 +13,8 @@ layout: default
     var disqus_shortname = 'brandonsilver'; // required: replace example with your forum shortname
 
     // The following are highly recommended additional parameters. Remove the slashes in front to use.
-    var disqus_identifier = '{{ post.id }}';
-    var disqus_url = 'http://www.brandonsilver.com{{ post.url }}';
+    var disqus_identifier = '{{ page.url }}';
+    var disqus_url = 'http://www.brandonsilver.com{{page.url}}';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
