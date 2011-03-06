@@ -18,7 +18,7 @@ sudo apt-get install openjdk-6-jre-headless
 I then proceeded to download the latest version of the server:
 
 {% highlight console %}
-wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859 minecraft-server.jar
+wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859
 {% endhighlight %}
 
 At this point, I also made sure that [GNU screen](http://www.gnu.org/software/screen/) was installed so I could run minecraft-server in the background between SSH sessions.
