@@ -10,3 +10,12 @@ ping -c3 www.google.com
 {% endhighlight %}
 
 That will ping www.google.com three times, showing all of the relevant metrics along the way.
+
+{% highlight python %}
+m pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import HtmlFormatter
+
+code = 'print "Hello World"'
+print highlight(code, PythonLexer(), HtmlFormatter())
+{% endhighlight %}
