@@ -3,13 +3,24 @@
  <title>BrandonSilver.com</title>
  <link href="http://www.brandonsilver.com/atom.xml" rel="self"/>
  <link href="http://www.brandonsilver.com/"/>
- <updated>2011-04-10T00:04:37-05:00</updated>
+ <updated>2011-05-30T22:43:17-05:00</updated>
  <id>http://www.brandonsilver.com/</id>
  <author>
    <name>Brandon Silver</name>
    <email>brandon@silverimaging.net</email>
  </author>
 
+ 
+ <entry>
+   <title>And we're back!</title>
+   <link href="http://www.brandonsilver.com/2011/05/30/And-we%27re-back%21.html"/>
+   <updated>2011-05-30T00:00:00-05:00</updated>
+   <id>http://www.brandonsilver.com/2011/05/30/And-we're-back!</id>
+   <content type="html">&lt;p&gt;After a brief hiatus the cause of which I am too embarrassed to speak of, brandonsilver.com is back up and running. On a completely unrelated note, I would highly recommend NOT allowing your domains to expire in order to re-register in the hopes of doing so more cheaply than an actual transfer. When they expire, they automatically fall into a 30-day limbo of sorts where no one can re-register them save for the original registrant (and a lot of good that does if you've canceled your account with said registrant). Basically, find a good domain host &lt;strong&gt;and stick with it&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Any who, what have I been up to these past months sans-website? I've been pretty busy, actually, what with graduating high school and all. Hopefully I'll stay busy through the summer and not go stir-crazy with boredom at home.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Minecraft Server on an Amazon EC2 Micro Instance</title>
