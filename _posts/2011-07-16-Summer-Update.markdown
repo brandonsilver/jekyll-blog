@@ -25,7 +25,7 @@ and interesting about the restaurant business.
 ### More Employment
 
 And if all of that wasn't enough, I'm also doing contractual work for [Stamm Web Creations](http://www.stammwebcreations.com/).
-I'm mostly building and managing WordPress-based websites, but I also do other tech-related jobs
+I'm mostly building and managing WordPress-based websites, but I do other tech-related jobs
 for them as well. 
 
 So, that's what I've been up to so far this summer. When school is close to starting I'll post a summer-in-review post too.
