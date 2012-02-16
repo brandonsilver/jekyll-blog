@@ -3,13 +3,26 @@
  <title>BrandonSilver.com</title>
  <link href="http://www.brandonsilver.com/atom.xml" rel="self"/>
  <link href="http://www.brandonsilver.com/"/>
- <updated>2012-01-30T17:22:33-06:00</updated>
+ <updated>2012-02-16T04:08:51-06:00</updated>
  <id>http://www.brandonsilver.com/</id>
  <author>
    <name>Brandon Silver</name>
    <email>brandon@silverimaging.net</email>
  </author>
 
+ 
+ <entry>
+   <title>New Notes Website</title>
+   <link href="http://www.brandonsilver.com/2012/02/16/New-Notes-Website.html"/>
+   <updated>2012-02-16T00:00:00-06:00</updated>
+   <id>http://www.brandonsilver.com/2012/02/16/New-Notes-Website</id>
+   <content type="html">&lt;p&gt;I've just finished making a seperate website for my school notes. You can find it at http://notes.brandonsilver.com/.
+I started it mostly because I already took my Computer Science II notes in markdown, and I wanted a more
+readable medium for those notes than just vim. Plus, others in my class might be interested as well, so I went ahead
+and started a new &lt;a href=&quot;https://github.com/mojombo/jekyll/wiki&quot;&gt;jekyll-based&lt;/a&gt; site for those notes, complete with fancy &lt;a href=&quot;http://pygments.org/&quot;&gt;Pygments&lt;/a&gt; syntax highlighting for the
+multitude of Java code fragments.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Summer Update</title>
