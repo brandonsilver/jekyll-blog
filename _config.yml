@@ -1,5 +1,4 @@
 markdown: rdiscount
 pygments: true
 
-base_url: http://www.brandonsilver.com/
 description: "An infrequently updated blog covering UNIX systems administration, photograpy, and everything in between."
