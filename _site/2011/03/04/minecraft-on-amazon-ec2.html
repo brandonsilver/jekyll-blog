@@ -36,44 +36,25 @@
 
 <p>As it is my first Minecraft server, I decided to use the vanilla server from <a href="http://www.minecraft.net/download.jsp">Mojang Specifications</a>. It isn't as feature-packed as others like HeyO, but it is relatively simple to get going. My instance (Ubuntu Server 10.04, ami-4a0df923 on EC2) didn't have the Java Runtime Environment pre-installed, so I installed it using apt-get:</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">sudo apt-get install openjdk-6-jre-headless</span>
-</code></pre>
-</div>
-
+<p>Liquid error: No such file or directory - posix_spawnp</p>
 
 <p>I then proceeded to download the latest version of the server:</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859</span>
-</code></pre>
-</div>
-
+<p>Liquid error: No such file or directory - posix_spawnp</p>
 
 <p>At this point, I also made sure that <a href="http://www.gnu.org/software/screen/">GNU screen</a> was installed so I could run minecraft-server in the background between SSH sessions.</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">sudo apt-get install screen</span>
-</code></pre>
-</div>
-
+<p>Liquid error: No such file or directory - posix_spawnp</p>
 
 <p>Since I am running the server in a low-memory environment, I adjusted the instructions given on the <a href="http://www.minecraft.net/download.jsp">download page</a> to suit and put it all in a small startup script, start.sh, which I placed in the same directory as minecraft-server.jar:</p>
 
-<div class="highlight"><pre><code class="bash"><span class="c">#!/bin/bash</span>
-<span class="c"># Minecraft Server startup script</span>
-java -Xmx500M -Xms500M -jar minecraft-server.jar nogui
-</code></pre>
-</div>
-
+<p>Liquid error: No such file or directory - posix_spawnp</p>
 
 <p>This should allow the server to startup without error. Make sure that start.sh has executable permissions via <code>chmod +x start.sh</code> .</p>
 
 <p>Now it's time to start the server with the following commands, replacing <code>/path/to/minecraft-server</code> with whatever path you downloaded minecraft-server.jar to:</p>
 
-<div class="highlight"><pre><code class="console"><span class="go">screen -DR</span>
-<span class="go">cd /path/to/minecraft-server</span>
-<span class="go">./start.sh</span>
-</code></pre>
-</div>
-
+<p>Liquid error: No such file or directory - posix_spawnp</p>
 
 <p>You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server's public IP address.</p>
 
@@ -154,7 +135,7 @@ new TWTR.Widget({
 <div id="main_content_bottom">
 </div>
 
-<div id="footer"><strong>Copyright &copy; 2010-2011 <a href="http://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> Thu Feb 16 04:11:32 -0600 2012 </strong>
+<div id="footer"><strong>Copyright &copy; 2010-2011 <a href="http://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2012-09-07 00:35:51 -0500 </strong>
 </div>
 </div>
 </body>
