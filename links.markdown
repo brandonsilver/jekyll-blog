@@ -19,6 +19,6 @@ Title: Links
  * [2013 Spring](https://www.evernote.com/pub/bas1/2013spring) **<-- CURRENT**
    * MATH 2163 Calculus III
    * CS 3613 Theoretical Foundations of Computer Science
-   * CS 3663 Organization of Programming Languages
+   * CS 3363 Organization of Programming Languages
    * GEOG 1014 Geology & Human Affairs
    * HONR 3023 Contemporary Cultures of the Western World
