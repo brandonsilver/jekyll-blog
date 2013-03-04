@@ -4,7 +4,7 @@ body {
 }
 #container {
 	margin: 0 auto;
-	width: 750px
+	width: 850px
 }
 #header {
 	width: 100%
@@ -20,16 +20,16 @@ body {
 #main_content {
 	margin: 0 auto;
 	width: 100%;
-	background: #FFFFFF url('images/background_content.gif');
+	background: #FFFFFF;
 	background-repeat: repeat-y
 } 
 #main_content_top {
 	height: 30px;
-	background: #FFFFFF url('images/background_top.gif');
+	background: #FFFFFF;
 } 
 #main_content_bottom {
 	height: 30px;
-	background: #FFFFFF url('images/background_bottom.gif');
+	background: #FFFFFF;
 }
 #disqus_thread {
 	background: #FFFFFF;
@@ -41,10 +41,13 @@ body {
 }
 .content {
 	float: left;
-	width: 510px;
+	width: 610px;
 	text-align: justify;
 	padding: 0 30px 0 30px;
 	font-size: 14px
+}
+.content li {
+	margin-left: 20px;
 }
 .menu {
 	width: 139px;
@@ -126,3 +129,4 @@ a.menu_link:hover {
 code {
 	font-family: Monaco, "Lucida Console", monospace
 }
+
