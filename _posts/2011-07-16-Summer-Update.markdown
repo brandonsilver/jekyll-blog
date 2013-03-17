@@ -6,6 +6,8 @@ title: Summer Update
 This summer started out uneventful enough. For most of June I didn't do
 very much. Sure, I did tidy up the yard a bit, but not a whole lot besides that.
 
+<!--more-->
+
 ### Volunteer Work
 ![Image of the HOPE Center of Edmond](/images/2011/07/16/hopecenter.jpg)
 
