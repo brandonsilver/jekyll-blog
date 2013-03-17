@@ -3,9 +3,9 @@ layout: default
 Title: Links
 ---
 
-## Links ##
+## Useful Links ##
 
-### School Notebooks ###
+### My school notebooks ###
  * [2008-2009](http://www.evernote.com/pub/bas1/school_08-09)
  * [2009-2010](http://www.evernote.com/pub/bas1/School_2009-2010)
  * [2010-2011](http://www.evernote.com/pub/bas1/school10-11)
@@ -21,3 +21,8 @@ Title: Links
    * CS 3363 Organization of Programming Languages
    * GEOG 1014 Geology & Human Affairs
    * HONR 3023 Contemporary Cultures of the Western World
+
+### Resources I use ###
+ * [OverAPI.com](http://overapi.com/) *A large collection of cheat sheets for just about anything computer related*
+ * [ifconfig.me](http://ifconfig.me/) *A minmalist IP address checker that also works on the command line:* <code>curl ifconfig.me</code>
+ * [Web Equation Editor](http://webdemo.visionobjects.com/equation.html?locale=default) *draw a mathematical expression and get the corresponding LaTeX or MathML markup*
