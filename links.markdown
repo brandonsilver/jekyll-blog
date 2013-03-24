@@ -1,6 +1,6 @@
 ---
 layout: default
-Title: Links
+title: Useful links
 ---
 
 ## Useful Links ##

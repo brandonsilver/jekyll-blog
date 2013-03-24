@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Brandon Silver
+title: Home
 ---
 
 ## Recent Blog Posts ##
