@@ -11,17 +11,18 @@ title: Home
 </p>
 
 ## About Me ##
-Hello there! My main interests these days are in web development
-and UNIX server administration. I also enjoy photography, so check 
-me out on <a href="http://www.flickr.com/photos/silverimaging/">flickr!</a></p>
+Hello there! I'm a sophomore in Computer Science at Oklahoma State University. My interests these
+days are mostly centered around exploring the wide world of IT, with some casual
+[photography](http://www.flickr.com/photos/silverimaging/) and video gaming thrown into the mix.
 
 
 ## Contact Info ##
 
 Email: <brandon@brandonsilver.com>
 
-I use GnuPG/PGP to add a layer of trust to my email. You can find my public
-key (ID: <code>D60769BA</code>) on most public key servers ([like this one](http://pgp.mit.edu/)).
+Email is my preferred method of Internet-based communication. I use GnuPG/PGP to add a layer
+of trust to my email. You can find my public key (ID: <code>D60769BA</code>) on most public
+key servers ([like this one](http://pgp.mit.edu/)).
 
 ### Social media ###
 Facebook: [brandon.silver2](https://www.facebook.com/brandon.silver2)  
