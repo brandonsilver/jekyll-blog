@@ -3,7 +3,7 @@
  <title>BrandonSilver.com</title>
  <link href="http://www.brandonsilver.com/atom.xml" rel="self"/>
  <link href="http://www.brandonsilver.com/"/>
- <updated>2013-03-31T17:32:15-05:00</updated>
+ <updated>2013-03-31T17:39:32-05:00</updated>
  <id>http://www.brandonsilver.com/</id>
  <author>
    <name>Brandon Silver</name>
@@ -13,16 +13,16 @@
  
  <entry>
    <title>Major site overhaul</title>
-   <link href="http://www.brandonsilver.com/2013/03/24/Major-site-overhaul.html"/>
-   <updated>2013-03-24T00:00:00-05:00</updated>
-   <id>http://www.brandonsilver.com/2013/03/24/Major-site-overhaul</id>
+   <link href="http://www.brandonsilver.com/2013/03/31/Major-site-overhaul.html"/>
+   <updated>2013-03-31T00:00:00-05:00</updated>
+   <id>http://www.brandonsilver.com/2013/03/31/Major-site-overhaul</id>
    <content type="html">&lt;p&gt;This past spring break I decided that I &lt;em&gt;really&lt;/em&gt; needed to dust off my website
 and start using it for what I originally intended: documenting the neat projects
 I work on, writing about the topics that interest me, and serving as a hub for
 my overall Internet presence. The improvements I've made should hopefully put
 some momentum behind that. In short, I made some layout changes to the site to
 make it more readable, aquired a Class 2 SSL Certificate from StartSSL, and
-am switching my personal e-mail address to &lt;a href=&quot;&amp;#x6d;&amp;#x61;&amp;#105;&amp;#x6c;&amp;#116;&amp;#x6f;&amp;#x3a;&amp;#x62;&amp;#x72;&amp;#x61;&amp;#110;&amp;#x64;&amp;#111;&amp;#110;&amp;#64;&amp;#x62;&amp;#114;&amp;#97;&amp;#110;&amp;#100;&amp;#x6f;&amp;#110;&amp;#115;&amp;#105;&amp;#x6c;&amp;#x76;&amp;#x65;&amp;#114;&amp;#x2e;&amp;#x63;&amp;#x6f;&amp;#109;&quot;&gt;&amp;#98;&amp;#x72;&amp;#97;&amp;#x6e;&amp;#x64;&amp;#x6f;&amp;#110;&amp;#64;&amp;#98;&amp;#114;&amp;#x61;&amp;#110;&amp;#100;&amp;#x6f;&amp;#x6e;&amp;#115;&amp;#105;&amp;#x6c;&amp;#118;&amp;#x65;&amp;#x72;&amp;#46;&amp;#x63;&amp;#111;&amp;#x6d;&lt;/a&gt; (with
+am switching my personal e-mail address to &lt;a href=&quot;&amp;#109;&amp;#97;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#x6f;&amp;#x3a;&amp;#x62;&amp;#x72;&amp;#97;&amp;#110;&amp;#100;&amp;#x6f;&amp;#x6e;&amp;#x40;&amp;#98;&amp;#114;&amp;#x61;&amp;#x6e;&amp;#x64;&amp;#111;&amp;#110;&amp;#115;&amp;#x69;&amp;#x6c;&amp;#x76;&amp;#101;&amp;#114;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#109;&quot;&gt;&amp;#x62;&amp;#114;&amp;#97;&amp;#110;&amp;#x64;&amp;#x6f;&amp;#x6e;&amp;#64;&amp;#x62;&amp;#x72;&amp;#x61;&amp;#x6e;&amp;#100;&amp;#111;&amp;#x6e;&amp;#x73;&amp;#x69;&amp;#x6c;&amp;#118;&amp;#x65;&amp;#x72;&amp;#x2e;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt; (with
 a new GPG key to go with it).&lt;/p&gt;
 
 &lt;!--more--&gt;
@@ -42,15 +42,15 @@ a new GPG key to go with it).&lt;/p&gt;
 
 &lt;p&gt;I also went to the trouble to get a Class 2 SSL Certificate from &lt;a href=&quot;http://www.startssl.com/&quot;&gt;StartSSL&lt;/a&gt;. You can access my website through SSL using &lt;a href=&quot;https://www.brandonsilver.com/&quot;&gt;https://www.brandonsilver.com/&lt;/a&gt;, but your browser may not indicate the connection is fully secure due to the Twitter and Disqus widgets that come from outside of the encrypted connection. Otherwise I would have began redirecting everything to the SSL-enabled URL by default (this is one of a couple of reasons I'm considering dropping all of the outside-hosted stuff from my website, I'll post about that in more detail later).&lt;/p&gt;
 
-&lt;p&gt;As far as StartSSL goes, the application process for my Class 2 Certificate was very simple and easy to follow. For the Class 2 Certificate, they require two forms of picture ID and then contact you via phone to ask further questions to verify your identity. After successful verification, they then provide you with the certificates you need, including wild card certificates. StartSSL also provides &lt;strong&gt;free&lt;/strong&gt; Class 1 Certificates if you aren't interested in going through the extra verification or paying the (very, &lt;em&gt;very&lt;/em&gt; low price as far as most certificates go) of $59.90 required for the more extensive certificate.&lt;/p&gt;
+&lt;p&gt;As far as StartSSL goes, the application process for my Class 2 Certificate was very simple and easy to follow. For the Class 2 Certificate, they require two forms of picture ID and then contact you via phone to ask further questions to verify your identity. After successful verification, they then provide you with the certificates you need, including wild card certificates. StartSSL also provides &lt;strong&gt;free&lt;/strong&gt; Class 1 Certificates if you aren't interested in going through the extra verification or paying the (very, &lt;em&gt;very&lt;/em&gt; low price as far as most certificates go) $59.90 required for the more extensive certificate.&lt;/p&gt;
 
 &lt;h3&gt;Change in primary email, GnuPG key&lt;/h3&gt;
 
-&lt;p&gt;I'm switching my primary personal email address to &lt;a href=&quot;&amp;#x6d;&amp;#97;&amp;#105;&amp;#108;&amp;#x74;&amp;#x6f;&amp;#58;&amp;#x62;&amp;#x72;&amp;#x61;&amp;#110;&amp;#100;&amp;#x6f;&amp;#110;&amp;#64;&amp;#x62;&amp;#114;&amp;#x61;&amp;#x6e;&amp;#x64;&amp;#111;&amp;#x6e;&amp;#x73;&amp;#105;&amp;#x6c;&amp;#x76;&amp;#x65;&amp;#x72;&amp;#46;&amp;#99;&amp;#111;&amp;#x6d;&quot;&gt;&amp;#98;&amp;#x72;&amp;#x61;&amp;#110;&amp;#100;&amp;#111;&amp;#x6e;&amp;#x40;&amp;#x62;&amp;#x72;&amp;#x61;&amp;#x6e;&amp;#x64;&amp;#x6f;&amp;#110;&amp;#x73;&amp;#105;&amp;#108;&amp;#x76;&amp;#x65;&amp;#x72;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&lt;/a&gt; since I haven't done anything with my old Silver Imaging website in quite a while and have no plans to use it in the future. You can look up my new PGP public key on most public key servers.&lt;/p&gt;
+&lt;p&gt;I'm switching my primary personal email address to &lt;a href=&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#x3a;&amp;#x62;&amp;#114;&amp;#x61;&amp;#x6e;&amp;#100;&amp;#111;&amp;#x6e;&amp;#x40;&amp;#x62;&amp;#114;&amp;#97;&amp;#x6e;&amp;#x64;&amp;#111;&amp;#110;&amp;#115;&amp;#x69;&amp;#x6c;&amp;#118;&amp;#101;&amp;#114;&amp;#46;&amp;#99;&amp;#111;&amp;#x6d;&quot;&gt;&amp;#98;&amp;#114;&amp;#97;&amp;#110;&amp;#100;&amp;#x6f;&amp;#x6e;&amp;#x40;&amp;#98;&amp;#114;&amp;#x61;&amp;#110;&amp;#100;&amp;#111;&amp;#x6e;&amp;#115;&amp;#x69;&amp;#x6c;&amp;#x76;&amp;#x65;&amp;#x72;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt; since I haven't done anything with my old Silver Imaging website in quite a while and have no plans to use it in the future. You can look up my new PGP public key on most public key servers.&lt;/p&gt;
 
 &lt;h3&gt;Improvements still on the roadmap&lt;/h3&gt;
 
-&lt;p&gt;I plan on adding a &quot;bread crumb&quot; style navigation system to the area above each post which will make page navigation more clear. I'm also considering getting rid of the Disqus and Twitter widgets since they seem to be adding a bunch of tracking cookies not related to the function of my website, which in term means a compromise of privacy for those who visit pages containing those elements on my website. I'll expand on this issue later on.&lt;/p&gt;
+&lt;p&gt;I plan on adding a &quot;bread crumb&quot; style navigation system to the area above each post which will make page navigation more clear. I'm also considering getting rid of the Disqus and Twitter widgets since they seem to be adding a bunch of tracking cookies not related to the function of my website, which in turn means a compromise of privacy for those who visit pages containing those elements on my website. I'll expand on this issue in more detail at a later date.&lt;/p&gt;
 </content>
  </entry>
  
