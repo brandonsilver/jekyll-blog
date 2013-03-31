@@ -23,6 +23,6 @@ title: Useful links
    * HONR 3023 Contemporary Cultures of the Western World
 
 ### Resources I use ###
-[OverAPI.com](http://overapi.com/) *Lots of computer-related cheet sheets*  
+[OverAPI.com](http://overapi.com/) *Lots of computer-related cheat sheets*  
 [ifconfig.me](http://ifconfig.me/) *A minmalist IP address checker. Usable in CLI:* <code>curl ifconfig.me</code>  
 [Web Equation Editor](http://webdemo.visionobjects.com/equation.html?locale=default) *Draw math expressions and get equivalent LaTeX markup* 
