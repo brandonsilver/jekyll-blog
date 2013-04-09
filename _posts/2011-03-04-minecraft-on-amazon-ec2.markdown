@@ -5,6 +5,8 @@ title: Minecraft Server on an Amazon EC2 Micro Instance
 
 Over the past couple of weeks, I've been using my free Amazon EC2 Micro instance as a [Minecraft](http://www.minecraft.net) server. It isn't ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience. 
 
+<!--more-->
+
 ### Setup ###
 
 _(This post assumes that you already have a running instance. If you are interested in setting up your own EC2 Instance from scratch, have a look at <http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/>. It also shows you how to setup an OpenVPN server.)_
