@@ -16,14 +16,16 @@ title: Useful links
    * CS 3443 Computer Systems
    * CS 2433 C/C++ Programming
    * CS 3563 Discrete Math
- * [2013 Spring](https://www.evernote.com/pub/bas1/2013spring) **<-- CURRENT**
+ * [2013 Spring](https://www.evernote.com/pub/bas1/2013spring)
    * MATH 2163 Calculus III
    * CS 3363 Organization of Programming Languages
    * GEOG 1014 Geology & Human Affairs
    * HONR 3023 Contemporary Cultures of the Western World
 
-### Resources I use ###
+### Development Resources ###
 [OverAPI.com](http://overapi.com/) *Lots of computer-related cheat sheets*  
+[Big-O Cheat Sheet](http://bigocheatsheet.com/) *Comparison of search/sort algorithms and common data structures*  
+
+### Web Tools ###
+[Web Equation Editor](http://webdemo.visionobjects.com/equation.html?locale=default) *Draw math expressions and get equivalent LaTeX markup*  
 [ifconfig.me](http://ifconfig.me/) *A minmalist IP address checker. Usable in CLI:* <code>curl ifconfig.me</code>  
-[Web Equation Editor](http://webdemo.visionobjects.com/equation.html?locale=default) *Draw math expressions and get equivalent LaTeX markup* 
-[Big-O Cheat Sheet](http://bigocheatsheet.com/) *Comparison of search/sort algorithms and common data structures*
