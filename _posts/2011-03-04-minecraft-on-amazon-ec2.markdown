@@ -49,6 +49,49 @@ cd /path/to/minecraft-server
 
 You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server's public IP address. 
 
+### Setting up Swap Space ###
+If you run into performance issues when running the server, you can try
+adding some swap space to supplement the RAM. I found the following script
+to do just that (copy & paste it into a file called swap.sh):
+
+{% highlight bash %}
+#!/bin/bash -e
+
+# Set default variable values
+: ${SWAP_SIZE_MEGABYTES:=1024}
+: ${SWAP_FILE_LOCATION:=/var/swap.space}
+
+if (( SWAP_SIZE_MEGABYTES <= 0 )); then
+    echo 'No swap size provided, exiting.'
+    exit 1
+elif [ -e "$SWAP_FILE_LOCATION" ]; then
+    echo "$SWAP_FILE_LOCATION" already exists,  skipping.  
+fi
+
+if ! swapon -s | grep -qF "$SWAP_FILE_LOCATION"; then
+    echo Creating "$SWAP_FILE_LOCATION", "$SWAP_SIZE_MEGABYTES"MB.
+    dd if=/dev/zero of="$SWAP_FILE_LOCATION" bs=1024 count=$(($SWAP_SIZE_MEGABYTES*1024))
+    mkswap "$SWAP_FILE_LOCATION"    
+    swapon "$SWAP_FILE_LOCATION"
+    echo 'Swap status:'
+    swapon -s
+else
+    echo Swap "$SWAP_FILE_LOCATION" file already on.
+fi
+
+echo 'Done.'
+{% endhighlight %}
+
+Next, run the following commands:
+
+{% highlight bash %}
+chmod a+x swap.sh # allows the script file to be executed as a program
+sudo su # the script needs root priveledges so we need to switch users to root
+./swap.sh # runs the script
+{% endhighlight %}
+
+That should give you an extra buffer of memory to work with.
+
 ### Practicality ###
 
 The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it's only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the [guide](http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud) at Stratum Security, you'll have a nice little OpenVPN server too.
