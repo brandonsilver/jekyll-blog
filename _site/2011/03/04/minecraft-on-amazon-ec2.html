@@ -75,6 +75,51 @@ java -Xmx500M -Xms500M -jar minecraft-server.jar nogui
 
 <p>You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server's public IP address.</p>
 
+<h3>Setting up Swap Space</h3>
+
+<p>If you run into performance issues when running the server, you can try
+adding some swap space to supplement the RAM. I found the following script
+to do just that (copy &amp; paste it into a file called swap.sh):</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c">#!/bin/bash -e</span>
+
+<span class="c"># Set default variable values</span>
+: <span class="k">${</span><span class="nv">SWAP_SIZE_MEGABYTES</span><span class="p">:=1024</span><span class="k">}</span>
+: <span class="k">${</span><span class="nv">SWAP_FILE_LOCATION</span><span class="p">:=/var/swap.space</span><span class="k">}</span>
+
+<span class="k">if</span> <span class="o">((</span> SWAP_SIZE_MEGABYTES &lt;<span class="o">=</span> 0 <span class="o">))</span>; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s1">&#39;No swap size provided, exiting.&#39;</span>
+    <span class="nb">exit </span>1
+<span class="k">elif</span> <span class="o">[</span> -e <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> already exists,  skipping.  
+<span class="k">fi</span>
+
+<span class="k">if</span> ! swapon -s | grep -qF <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo </span>Creating <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>, <span class="s2">&quot;$SWAP_SIZE_MEGABYTES&quot;</span>MB.
+    dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span><span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> <span class="nv">bs</span><span class="o">=</span>1024 <span class="se">\</span>
+        <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="nv">$SWAP_SIZE_MEGABYTES</span><span class="o">*</span><span class="m">1024</span><span class="k">))</span>
+    mkswap <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>    
+    swapon <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>
+    <span class="nb">echo</span> <span class="s1">&#39;Swap status:&#39;</span>
+    swapon -s
+<span class="k">else</span>
+<span class="k">    </span><span class="nb">echo </span>Swap <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> file already on.
+<span class="k">fi</span>
+
+<span class="nb">echo</span> <span class="s1">&#39;Done.&#39;</span>
+</code></pre></div>
+
+
+<p>Next, run the following commands:</p>
+
+<div class="highlight"><pre><code class="bash">chmod a+x swap.sh <span class="c"># allows the script file to be executed as a program</span>
+sudo su <span class="c"># the script needs root priveledges so we need to switch users to root</span>
+./swap.sh <span class="c"># runs the script</span>
+</code></pre></div>
+
+
+<p>That should give you an extra buffer of memory to work with.</p>
+
 <h3>Practicality</h3>
 
 <p>The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it's only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the <a href="http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud">guide</a> at Stratum Security, you'll have a nice little OpenVPN server too.</p>
@@ -123,7 +168,7 @@ java -Xmx500M -Xms500M -jar minecraft-server.jar nogui
 <div id="main_content_bottom">
 </div>
 
-<div id="footer"><strong>Copyright &copy; 2010-2013 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2013-05-06 03:53:01 -0500 </strong>
+<div id="footer"><strong>Copyright &copy; 2010-2013 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2013-05-09 21:54:20 -0500 </strong>
 </div>
 </div>
 </body>
