@@ -11,7 +11,7 @@ title: Home
 </p>
 
 ## About Me ##
-Hello there! I'm a sophomore in Computer Science at Oklahoma State University. My interests these
+Hello there! I'm a junior in Computer Science at Oklahoma State University. My interests these
 days are mostly centered around exploring the wide world of IT, with some casual
 [photography](http://www.flickr.com/photos/silverimaging/) and video gaming thrown into the mix.
 
