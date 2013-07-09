@@ -31,4 +31,4 @@ title: Useful links
 [ifconfig.me](http://ifconfig.me/) *A minmalist IP address checker. Usable in CLI:* <code>curl ifconfig.me</code>  
 
 ### Handy Software ###
-[Opt out of PRISM](https://prism-break.org/) *Software and services less privy to government surveillance.*
+[Opt out of PRISM](https://prism-break.org/) *Software and services less open to government surveillance.*
