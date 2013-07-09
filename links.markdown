@@ -29,3 +29,6 @@ title: Useful links
 ### Web Tools ###
 [Web Equation Editor](http://webdemo.visionobjects.com/equation.html?locale=default) *Draw math expressions and get equivalent LaTeX markup*  
 [ifconfig.me](http://ifconfig.me/) *A minmalist IP address checker. Usable in CLI:* <code>curl ifconfig.me</code>  
+
+### Handy Software ###
+[Opt out of PRISM](https://prism-break.org/) *Software and services less privy to government surveillance.*
