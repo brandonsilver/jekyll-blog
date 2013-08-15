@@ -1,7 +1,12 @@
 ---
 layout: post 
 title: Major site overhaul
-tags: website email security ssl
+tags:
+- website
+- jekyll
+- email
+- security
+- ssl
 ---
 
 This past spring break I decided that I *really* needed to dust off my website

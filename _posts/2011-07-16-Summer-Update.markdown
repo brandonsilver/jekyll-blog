@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Summer Update
+tags:
+- employment
+- volunteering
 ---
 
 This summer started out uneventful enough. For most of June I didn't do

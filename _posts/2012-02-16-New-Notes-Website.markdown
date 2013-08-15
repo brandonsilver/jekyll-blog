@@ -1,5 +1,9 @@
 ---
 layout: post
+tags:
+- website
+- school
+- jekyll
 ---
 
 I've just finished making a seperate website for my school notes. You can find it at [notes.brandonsilver.com](http://notes.brandonsilver.com/).
