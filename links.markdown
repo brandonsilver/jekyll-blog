@@ -21,6 +21,12 @@ title: Useful links
    * CS 3363 Organization of Programming Languages
    * GEOG 1014 Geology & Human Affairs
    * HONR 3023 Contemporary Cultures of the Western World
+ * [2013 Fall](https://www.evernote.com/pub/bas1/2013fall)
+   * MATH 3013 Linear Algebra
+   * CS 3613 Theoretical Foundations of Computer Science
+   * ENGL 3323 Technical Writing
+   * GEOG 3713 Geography of the US & Canada
+   * CS 4183 Video Game Design
 
 ### Development Resources ###
 [OverAPI.com](http://overapi.com/) *Lots of computer-related cheat sheets*  
