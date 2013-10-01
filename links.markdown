@@ -30,7 +30,8 @@ title: Useful links
 
 ### Development Resources ###
 [OverAPI.com](http://overapi.com/) *Lots of computer-related cheat sheets*  
-[Big-O Cheat Sheet](http://bigocheatsheet.com/) *Comparison of search/sort algorithms and common data structures*  
+[Big-O Cheat Sheet](http://bigocheatsheet.com/) *Comparison of search/sort algorithms and common data structures*   
+[regex101](http://regex101.com/) *Learn regular expressions in a dynamic, web-based environment*
 
 ### Web Tools ###
 [Web Equation Editor](http://webdemo.visionobjects.com/equation.html?locale=default) *Draw math expressions and get equivalent LaTeX markup*  
