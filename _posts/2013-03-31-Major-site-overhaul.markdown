@@ -1,7 +1,12 @@
 ---
 layout: post 
 title: Major site overhaul
-tags: website email security ssl
+tags:
+- website
+- jekyll
+- email
+- security
+- ssl
 ---
 
 This past spring break I decided that I *really* needed to dust off my website
@@ -27,7 +32,7 @@ You can see the rest of my changes at this blog's repository on [Github](https:/
 
 ### Security/trust improvements: SSL ###
 
-I also went to the trouble to get a Class 2 SSL Certificate from [StartSSL](http://www.startssl.com/). You can access my website through SSL using [https://www.brandonsilver.com/](https://www.brandonsilver.com/), but your browser may not indicate the connection is fully secure due to the Twitter and Disqus widgets that come from outside of the encrypted connection. Otherwise I would have began redirecting everything to the SSL-enabled URL by default (this is one of a couple of reasons I'm considering dropping all of the outside-hosted stuff from my website, I'll post about that in more detail later).
+I also went to the trouble to get a Class 2 SSL Certificate from [StartSSL](http://www.startssl.com/). You can access my website through SSL using [https://www.brandonsilver.com/](https://www.brandonsilver.com/), <strike>but your browser may not indicate the connection is fully secure due to the Twitter and Disqus widgets that come from outside of the encrypted connection. Otherwise I would have began redirecting everything to the SSL-enabled URL by default (this is one of a couple of reasons I'm considering dropping all of the outside-hosted stuff from my website, I'll post about that in more detail later).</strike> **UPDATE** *I've since fixed this issue, and the website now goes through SSL by default.*
 
 As far as StartSSL goes, the application process for my Class 2 Certificate was very simple and easy to follow. For the Class 2 Certificate, they require two forms of picture ID and then contact you via phone to ask further questions to verify your identity. After successful verification, they then provide you with the certificates you need, including wild card certificates. StartSSL also provides **free** Class 1 Certificates if you aren't interested in going through the extra verification or paying the (very, *very* low price as far as most certificates go) $59.90 required for the more extensive certificate.
 
