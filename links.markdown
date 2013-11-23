@@ -31,7 +31,7 @@ title: Useful links
 ### Development Resources ###
 [OverAPI.com](http://overapi.com/) *Lots of computer-related cheat sheets*   
 [Big-O Cheat Sheet](http://bigocheatsheet.com/) *Comparison of search/sort algorithms and common data structures*  
-[regex101](http://regex101.com/) *Learn regular expressions in a dynamic, web-based environment*
+[regex101](http://regex101.com/) *Learn regular expressions in a dynamic, web-based environment*   
 [Online REPs and REPLs](http://joel.franusic.com/Online-REPs-and-REPLs/) *Interactively experiment with various languages in-browser*
 
 ### Web Tools ###
