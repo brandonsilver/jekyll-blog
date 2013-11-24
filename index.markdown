@@ -1,6 +1,11 @@
 ---
 layout: default
 title: Home
+tags:
+- brandon silver
+- contact
+- email
+- blog
 ---
 
 ## Recent Blog Posts ##
