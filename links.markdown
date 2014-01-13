@@ -27,6 +27,12 @@ title: Useful links
    * ENGL 3323 Technical Writing
    * GEOG 3713 Geography of the US & Canada
    * CS 4183 Video Game Design
+ * [2014 Spring](https://www.evernote.com/pub/bas1/2014spring)
+   * CS 4343 Data Structures & Algorithms I
+   * CS 4433 Introduction to Database Systems
+   * CS 4243 CS Security Algorithms
+   * STAT 4033 Engineering Statistics
+   * MATH 4033 History of Math
 
 ### Development Resources ###
 [OverAPI.com](http://overapi.com/) *Lots of computer-related cheat sheets*   
