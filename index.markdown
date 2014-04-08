@@ -25,9 +25,11 @@ days are mostly centered around exploring the wide world of IT, with some casual
 
 Email: <brandon@brandonsilver.com>
 
-Email is my preferred method of Internet-based communication. I use GnuPG/PGP to add a layer
-of trust to my email. You can find my public key (ID: <code>D60769BA</code>) on most public
-key servers ([like this one](http://pgp.mit.edu/)).
+Email is my preferred method of Internet-based communication. You can find my PGP public key
+(ID: <code>EEEA3A55</code>) on most public key servers ([like this one](http://pgp.mit.edu/)).
+
+**UPDATE 2014-04-08:** My previous PGP key expired, so I have updated the above paragraph to
+reflect my new key's ID.
 
 ### Social media ###
 Facebook: [brandon.silver2](https://www.facebook.com/brandon.silver2)  
