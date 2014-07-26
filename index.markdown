@@ -16,7 +16,7 @@ tags:
 </p>
 
 ## About Me ##
-Hello there! I'm a junior in Computer Science at Oklahoma State University. My interests these
+Hello there! I'm a senior in Computer Science at Oklahoma State University. My interests these
 days are mostly centered around exploring the wide world of IT, with some casual
 [photography](http://www.flickr.com/photos/silverimaging/) and video gaming thrown into the mix.
 
@@ -26,10 +26,10 @@ days are mostly centered around exploring the wide world of IT, with some casual
 Email: <brandon@brandonsilver.com>
 
 Email is my preferred method of Internet-based communication. You can find my PGP public key
-(ID: <code>EEEA3A55</code>) on most public key servers ([like this one](http://pgp.mit.edu/)).
+(ID: <code>D35F71CB</code>) on most public key servers ([like this one](http://pgp.mit.edu/)).
 
-**UPDATE 2014-04-08:** My previous PGP key expired, so I have updated the above paragraph to
-reflect my new key's ID.
+**UPDATE 2014-07-26:** I forgot the passphrase to my PGP private key, so I've generated a new
+keypair.
 
 ### Social media ###
 Facebook: [brandon.silver2](https://www.facebook.com/brandon.silver2)  
