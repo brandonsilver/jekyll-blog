@@ -1,4 +1,4 @@
 markdown: rdiscount
-pygments: true
+highlighter: true
 
 description: "An infrequently updated blog covering UNIX systems administration, photograpy, and everything in between."
