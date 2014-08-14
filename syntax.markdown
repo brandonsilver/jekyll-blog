@@ -5,9 +5,9 @@ title: syntax test
 
 This is just a test of pygment's syntax highligher.
 
-That will ping www.google.com three times, showing all of the relevant metrics along the way.
+This will print out the string "Hello, World!" when the program is run.
 
-{% highlight java %}
+```java
 public class HelloPrinter
 {
 	public static void main(String[] args)
@@ -15,4 +15,4 @@ public class HelloPrinter
 		System.out.println("Hello, World!");
 	}
 }
-{% endhighlight %}
+```
