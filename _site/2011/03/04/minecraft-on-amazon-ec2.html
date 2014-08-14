@@ -91,14 +91,14 @@ to do just that (copy &amp; paste it into a file called swap.sh):</p>
 : <span class="k">${</span><span class="nv">SWAP_SIZE_MEGABYTES</span><span class="p">:=1024</span><span class="k">}</span>
 : <span class="k">${</span><span class="nv">SWAP_FILE_LOCATION</span><span class="p">:=/var/swap.space</span><span class="k">}</span>
 
-<span class="k">if</span> <span class="o">((</span> SWAP_SIZE_MEGABYTES &lt;<span class="o">=</span> 0 <span class="o">))</span>; <span class="k">then</span>
+<span class="k">if</span> <span class="o">((</span> SWAP_SIZE_MEGABYTES &lt;<span class="o">=</span> 0 <span class="o">))</span><span class="p">;</span> <span class="k">then</span>
 <span class="k">    </span><span class="nb">echo</span> <span class="s1">&#39;No swap size provided, exiting.&#39;</span>
     <span class="nb">exit </span>1
-<span class="k">elif</span> <span class="o">[</span> -e <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">elif</span> <span class="o">[</span> -e <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 <span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> already exists,  skipping.  
 <span class="k">fi</span>
 
-<span class="k">if</span> ! swapon -s | grep -qF <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>; <span class="k">then</span>
+<span class="k">if</span> ! swapon -s <span class="p">|</span> grep -qF <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span><span class="p">;</span> <span class="k">then</span>
 <span class="k">    </span><span class="nb">echo </span>Creating <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>, <span class="s2">&quot;$SWAP_SIZE_MEGABYTES&quot;</span>MB.
     dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span><span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> <span class="nv">bs</span><span class="o">=</span>1024 <span class="se">\</span>
         <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="nv">$SWAP_SIZE_MEGABYTES</span><span class="o">*</span><span class="m">1024</span><span class="k">))</span>
@@ -172,7 +172,7 @@ sudo su <span class="c"># the script needs root priveledges so we need to switch
 <div id="main_content_bottom">
 </div>
 
-<div id="footer"><strong>Copyright &copy; 2010-2013 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2013-11-24 02:19:31 -0600 </strong>
+<div id="footer"><strong>Copyright &copy; 2010-2014 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2014-07-26 08:58:50 -0600 </strong>
 </div>
 </div>
 </body>
