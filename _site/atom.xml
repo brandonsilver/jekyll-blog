@@ -3,7 +3,7 @@
  <title>BrandonSilver.com</title>
  <link href="http://www.brandonsilver.com/atom.xml" rel="self"/>
  <link href="http://www.brandonsilver.com/"/>
- <updated>2014-07-26T08:58:50-06:00</updated>
+ <updated>2014-08-14T16:15:16-05:00</updated>
  <id>http://www.brandonsilver.com/</id>
  <author>
    <name>Brandon Silver</name>
@@ -14,52 +14,51 @@
  <entry>
    <title>Major site overhaul</title>
    <link href="http://www.brandonsilver.com/2013/03/31/Major-site-overhaul.html"/>
-   <updated>2013-03-31T00:00:00-06:00</updated>
+   <updated>2013-03-31T00:00:00-05:00</updated>
    <id>http://www.brandonsilver.com/2013/03/31/Major-site-overhaul</id>
    <content type="html">&lt;p&gt;This past spring break I decided that I &lt;em&gt;really&lt;/em&gt; needed to dust off my website
 and start using it for what I originally intended: documenting the neat projects
 I work on, writing about the topics that interest me, and serving as a hub for
-my overall Internet presence. The improvements I've made should hopefully put
+my overall Internet presence. The improvements I&amp;#39;ve made should hopefully put
 some momentum behind that. In short, I made some layout changes to the site to
 make it more readable, aquired a Class 2 SSL Certificate from StartSSL, and
-am switching my personal e-mail address to &lt;a href=&quot;&amp;#x6d;&amp;#97;&amp;#x69;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#x3a;&amp;#98;&amp;#114;&amp;#x61;&amp;#x6e;&amp;#100;&amp;#x6f;&amp;#110;&amp;#x40;&amp;#98;&amp;#114;&amp;#97;&amp;#x6e;&amp;#x64;&amp;#x6f;&amp;#110;&amp;#x73;&amp;#105;&amp;#x6c;&amp;#118;&amp;#101;&amp;#x72;&amp;#x2e;&amp;#99;&amp;#111;&amp;#x6d;&quot;&gt;&amp;#x62;&amp;#x72;&amp;#97;&amp;#110;&amp;#100;&amp;#111;&amp;#x6e;&amp;#64;&amp;#x62;&amp;#114;&amp;#97;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#x73;&amp;#105;&amp;#108;&amp;#118;&amp;#101;&amp;#114;&amp;#x2e;&amp;#99;&amp;#111;&amp;#x6d;&lt;/a&gt; (with
+am switching my personal e-mail address to &lt;a href=&quot;mailto:brandon@brandonsilver.com&quot;&gt;brandon@brandonsilver.com&lt;/a&gt; (with
 a new GPG key to go with it).&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-
 &lt;h3&gt;Layout changes&lt;/h3&gt;
 
-&lt;p&gt;I've made a few changes to the CSS of the site. Major updates include making the font sizes larger and increasing the width of the content area to match. I also switched the twitter widgets out due to warnings I was getting in the JavaScript console that my old ones were losing support.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ve made a few changes to the CSS of the site. Major updates include making the font sizes larger and increasing the width of the content area to match. I also switched the twitter widgets out due to warnings I was getting in the JavaScript console that my old ones were losing support.&lt;/p&gt;
 
-&lt;p&gt;I've also added &lt;a href=&quot;/archives.html&quot;&gt;archive functionality&lt;/a&gt; so that only the five most recent posts are displayed on the front page, with all of the posts available on the archives page. I did this by adding some &lt;a href=&quot;https://github.com/shopify/liquid/wiki/liquid-for-designers&quot;&gt;liquid templating logic&lt;/a&gt; to the index:&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ve also added &lt;a href=&quot;/archives.html&quot;&gt;archive functionality&lt;/a&gt; so that only the five most recent posts are displayed on the front page, with all of the posts available on the archives page. I did this by adding some &lt;a href=&quot;https://github.com/shopify/liquid/wiki/liquid-for-designers&quot;&gt;liquid templating logic&lt;/a&gt; to the index:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/2013/03/31/liquid_logic_post_list.png&quot; alt=&quot;screenshot of the logic used to list the five most recent posts&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;You can see the rest of my changes at this blog's repository on &lt;a href=&quot;https://github.com/brandonsilver/jekyll-blog&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can see the rest of my changes at this blog&amp;#39;s repository on &lt;a href=&quot;https://github.com/brandonsilver/jekyll-blog&quot;&gt;Github&lt;/a&gt;. &lt;/p&gt;
 
 &lt;h3&gt;Security/trust improvements: SSL&lt;/h3&gt;
 
-&lt;p&gt;I also went to the trouble to get a Class 2 SSL Certificate from &lt;a href=&quot;http://www.startssl.com/&quot;&gt;StartSSL&lt;/a&gt;. You can access my website through SSL using &lt;a href=&quot;https://www.brandonsilver.com/&quot;&gt;https://www.brandonsilver.com/&lt;/a&gt;, &lt;strike&gt;but your browser may not indicate the connection is fully secure due to the Twitter and Disqus widgets that come from outside of the encrypted connection. Otherwise I would have began redirecting everything to the SSL-enabled URL by default (this is one of a couple of reasons I'm considering dropping all of the outside-hosted stuff from my website, I'll post about that in more detail later).&lt;/strike&gt; &lt;strong&gt;UPDATE&lt;/strong&gt; &lt;em&gt;I've since fixed this issue, and the website now goes through SSL by default.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I also went to the trouble to get a Class 2 SSL Certificate from &lt;a href=&quot;http://www.startssl.com/&quot;&gt;StartSSL&lt;/a&gt;. You can access my website through SSL using &lt;a href=&quot;https://www.brandonsilver.com/&quot;&gt;https://www.brandonsilver.com/&lt;/a&gt;, &lt;strike&gt;but your browser may not indicate the connection is fully secure due to the Twitter and Disqus widgets that come from outside of the encrypted connection. Otherwise I would have began redirecting everything to the SSL-enabled URL by default (this is one of a couple of reasons I&amp;#39;m considering dropping all of the outside-hosted stuff from my website, I&amp;#39;ll post about that in more detail later).&lt;/strike&gt; &lt;strong&gt;UPDATE&lt;/strong&gt; &lt;em&gt;I&amp;#39;ve since fixed this issue, and the website now goes through SSL by default.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;As far as StartSSL goes, the application process for my Class 2 Certificate was very simple and easy to follow. For the Class 2 Certificate, they require two forms of picture ID and then contact you via phone to ask further questions to verify your identity. After successful verification, they then provide you with the certificates you need, including wild card certificates. StartSSL also provides &lt;strong&gt;free&lt;/strong&gt; Class 1 Certificates if you aren't interested in going through the extra verification or paying the (very, &lt;em&gt;very&lt;/em&gt; low price as far as most certificates go) $59.90 required for the more extensive certificate.&lt;/p&gt;
+&lt;p&gt;As far as StartSSL goes, the application process for my Class 2 Certificate was very simple and easy to follow. For the Class 2 Certificate, they require two forms of picture ID and then contact you via phone to ask further questions to verify your identity. After successful verification, they then provide you with the certificates you need, including wild card certificates. StartSSL also provides &lt;strong&gt;free&lt;/strong&gt; Class 1 Certificates if you aren&amp;#39;t interested in going through the extra verification or paying the (very, &lt;em&gt;very&lt;/em&gt; low price as far as most certificates go) $59.90 required for the more extensive certificate.&lt;/p&gt;
 
 &lt;h3&gt;Change in primary email, GnuPG key&lt;/h3&gt;
 
-&lt;p&gt;I'm switching my primary personal email address to &lt;a href=&quot;&amp;#109;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#58;&amp;#98;&amp;#114;&amp;#97;&amp;#110;&amp;#100;&amp;#x6f;&amp;#110;&amp;#x40;&amp;#98;&amp;#x72;&amp;#97;&amp;#110;&amp;#x64;&amp;#111;&amp;#x6e;&amp;#x73;&amp;#105;&amp;#x6c;&amp;#x76;&amp;#x65;&amp;#x72;&amp;#46;&amp;#x63;&amp;#111;&amp;#109;&quot;&gt;&amp;#98;&amp;#x72;&amp;#x61;&amp;#x6e;&amp;#x64;&amp;#x6f;&amp;#x6e;&amp;#64;&amp;#98;&amp;#114;&amp;#97;&amp;#x6e;&amp;#100;&amp;#111;&amp;#x6e;&amp;#x73;&amp;#105;&amp;#108;&amp;#118;&amp;#101;&amp;#x72;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&lt;/a&gt; since I haven't done anything with my old Silver Imaging website in quite a while and have no plans to use it in the future. You can look up my new PGP public key on most public key servers.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m switching my primary personal email address to &lt;a href=&quot;mailto:brandon@brandonsilver.com&quot;&gt;brandon@brandonsilver.com&lt;/a&gt; since I haven&amp;#39;t done anything with my old Silver Imaging website in quite a while and have no plans to use it in the future. You can look up my new PGP public key on most public key servers.&lt;/p&gt;
 
 &lt;h3&gt;Improvements still on the roadmap&lt;/h3&gt;
 
-&lt;p&gt;I plan on adding a &quot;bread crumb&quot; style navigation system to the area above each post which will make page navigation more clear. I'm also considering getting rid of the Disqus and Twitter widgets since they seem to be adding a bunch of tracking cookies not related to the function of my website, which in turn means a compromise of privacy for those who visit pages containing those elements on my website. I'll expand on this issue in more detail at a later date.&lt;/p&gt;
+&lt;p&gt;I plan on adding a &amp;quot;bread crumb&amp;quot; style navigation system to the area above each post which will make page navigation more clear. I&amp;#39;m also considering getting rid of the Disqus and Twitter widgets since they seem to be adding a bunch of tracking cookies not related to the function of my website, which in turn means a compromise of privacy for those who visit pages containing those elements on my website. I&amp;#39;ll expand on this issue in more detail at a later date.&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>New Notes Website</title>
    <link href="http://www.brandonsilver.com/2012/02/16/New-Notes-Website.html"/>
-   <updated>2012-02-16T00:00:00-07:00</updated>
+   <updated>2012-02-16T00:00:00-06:00</updated>
    <id>http://www.brandonsilver.com/2012/02/16/New-Notes-Website</id>
-   <content type="html">&lt;p&gt;I've just finished making a seperate website for my school notes. You can find it at &lt;a href=&quot;http://notes.brandonsilver.com/&quot;&gt;notes.brandonsilver.com&lt;/a&gt;.
+   <content type="html">&lt;p&gt;I&amp;#39;ve just finished making a seperate website for my school notes. You can find it at &lt;a href=&quot;http://notes.brandonsilver.com/&quot;&gt;notes.brandonsilver.com&lt;/a&gt;.
 I started it mostly because I already took my Computer Science II notes in markdown, and I wanted a more
 readable medium for those notes than just vim. Plus, others in my class might be interested as well, so I went ahead
 and started a new &lt;a href=&quot;https://github.com/mojombo/jekyll/wiki&quot;&gt;jekyll-based&lt;/a&gt; site for those notes, complete with fancy &lt;a href=&quot;http://pygments.org/&quot;&gt;Pygments&lt;/a&gt; syntax highlighting for the
@@ -70,107 +69,95 @@ multitude of Java code fragments.&lt;/p&gt;
  <entry>
    <title>Summer Update</title>
    <link href="http://www.brandonsilver.com/2011/07/16/Summer-Update.html"/>
-   <updated>2011-07-16T00:00:00-06:00</updated>
+   <updated>2011-07-16T00:00:00-05:00</updated>
    <id>http://www.brandonsilver.com/2011/07/16/Summer-Update</id>
-   <content type="html">&lt;p&gt;This summer started out uneventful enough. For most of June I didn't do
+   <content type="html">&lt;p&gt;This summer started out uneventful enough. For most of June I didn&amp;#39;t do
 very much. Sure, I did tidy up the yard a bit, but not a whole lot besides that.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-
 &lt;h3&gt;Volunteer Work&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/2011/07/16/hopecenter.jpg&quot; alt=&quot;Image of the HOPE Center of Edmond&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2011/07/16/hopecenter.jpg&quot; alt=&quot;Image of the HOPE Center of Edmond&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;However, toward the end of June I started volunteering at the &lt;a href=&quot;http://www.hopecenterofedmond.com&quot;&gt;Hope Center of Edmond&lt;/a&gt;,
 specifically in their food pantry. The folks over at the HOPE Center are a
 pleasure to work with, and I feel like I am making a positive contribution
 to our community. Overall I am very grateful for the experience
-that the HOPE Center has provided me with.&lt;/p&gt;
+that the HOPE Center has provided me with. &lt;/p&gt;
 
 &lt;h3&gt;Actual Employment&lt;/h3&gt;
 
-&lt;p&gt;I have also been working as a waiter at &lt;a href=&quot;http://maps.google.com/maps/place?cid=3401404715024300847&amp;amp;q=Al's+Cafe+and+Grill,+Edmond,+OK&amp;amp;hl=en&amp;amp;ved=0CBAQ-gswAA&amp;amp;sa=X&amp;amp;ei=oOYfTuDOFZCUzATw942UBA&amp;amp;sig2=KN3QWgRGOPPQ1VY8mO0fEw&quot;&gt;Al's Cafe and Grill&lt;/a&gt; for the past two and a half
-weeks. It's a small, old-fashioned onion burger joint that also has some delicious daily specials.
+&lt;p&gt;I have also been working as a waiter at &lt;a href=&quot;http://maps.google.com/maps/place?cid=3401404715024300847&amp;amp;q=Al&amp;#x27;s+Cafe+and+Grill,+Edmond,+OK&amp;amp;hl=en&amp;amp;ved=0CBAQ-gswAA&amp;amp;sa=X&amp;amp;ei=oOYfTuDOFZCUzATw942UBA&amp;amp;sig2=KN3QWgRGOPPQ1VY8mO0fEw&quot;&gt;Al&amp;#39;s Cafe and Grill&lt;/a&gt; for the past two and a half
+weeks. It&amp;#39;s a small, old-fashioned onion burger joint that also has some delicious daily specials. 
 The work is hard (and at times, messy too) but I love to work there. Everyday I learn something new
 and interesting about the restaurant business.&lt;/p&gt;
 
 &lt;h3&gt;More Employment&lt;/h3&gt;
 
-&lt;p&gt;And if all of that wasn't enough, I'm also doing contractual work for &lt;a href=&quot;http://www.stammwebcreations.com/&quot;&gt;Stamm Web Creations&lt;/a&gt;.
-I'm mostly building and managing WordPress-based websites, but I do other tech-related jobs
-for them as well.&lt;/p&gt;
+&lt;p&gt;And if all of that wasn&amp;#39;t enough, I&amp;#39;m also doing contractual work for &lt;a href=&quot;http://www.stammwebcreations.com/&quot;&gt;Stamm Web Creations&lt;/a&gt;.
+I&amp;#39;m mostly building and managing WordPress-based websites, but I do other tech-related jobs
+for them as well. &lt;/p&gt;
 
-&lt;p&gt;So, that's what I've been up to so far this summer. When school is close to starting I'll post a summer-in-review post too.&lt;/p&gt;
+&lt;p&gt;So, that&amp;#39;s what I&amp;#39;ve been up to so far this summer. When school is close to starting I&amp;#39;ll post a summer-in-review post too.&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>And we're back!</title>
-   <link href="http://www.brandonsilver.com/2011/05/30/And-we%27re-back%21.html"/>
-   <updated>2011-05-30T00:00:00-06:00</updated>
+   <link href="http://www.brandonsilver.com/2011/05/30/And-we're-back!.html"/>
+   <updated>2011-05-30T00:00:00-05:00</updated>
    <id>http://www.brandonsilver.com/2011/05/30/And-we're-back!</id>
-   <content type="html">&lt;p&gt;After a brief hiatus the cause of which I am too embarrassed to speak of, brandonsilver.com is back up and running. On a completely unrelated note, I would highly recommend NOT allowing your domains to expire in order to re-register in the hopes of doing so more cheaply than an actual transfer. When they expire, they automatically fall into a 30-day limbo of sorts where no one can re-register them save for the original registrant (and a lot of good that does if you've canceled your account with said registrant). Basically, find a good domain host &lt;strong&gt;and stick with it&lt;/strong&gt;.&lt;/p&gt;
+   <content type="html">&lt;p&gt;After a brief hiatus the cause of which I am too embarrassed to speak of, brandonsilver.com is back up and running. On a completely unrelated note, I would highly recommend NOT allowing your domains to expire in order to re-register in the hopes of doing so more cheaply than an actual transfer. When they expire, they automatically fall into a 30-day limbo of sorts where no one can re-register them save for the original registrant (and a lot of good that does if you&amp;#39;ve canceled your account with said registrant). Basically, find a good domain host &lt;strong&gt;and stick with it&lt;/strong&gt;. &lt;/p&gt;
 
-&lt;p&gt;Any who, what have I been up to these past months sans-website? I've been pretty busy, actually, what with graduating high school and all. Hopefully I'll stay busy through the summer and not go stir-crazy with boredom at home.&lt;/p&gt;
+&lt;p&gt;Any who, what have I been up to these past months sans-website? I&amp;#39;ve been pretty busy, actually, what with graduating high school and all. Hopefully I&amp;#39;ll stay busy through the summer and not go stir-crazy with boredom at home. &lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>Minecraft Server on an Amazon EC2 Micro Instance</title>
    <link href="http://www.brandonsilver.com/2011/03/04/minecraft-on-amazon-ec2.html"/>
-   <updated>2011-03-04T00:00:00-07:00</updated>
+   <updated>2011-03-04T00:00:00-06:00</updated>
    <id>http://www.brandonsilver.com/2011/03/04/minecraft-on-amazon-ec2</id>
-   <content type="html">&lt;p&gt;Over the past couple of weeks, I've been using my free Amazon EC2 Micro instance as a &lt;a href=&quot;http://www.minecraft.net&quot;&gt;Minecraft&lt;/a&gt; server. It isn't ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Over the past couple of weeks, I&amp;#39;ve been using my free Amazon EC2 Micro instance as a &lt;a href=&quot;http://www.minecraft.net&quot;&gt;Minecraft&lt;/a&gt; server. It isn&amp;#39;t ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience. &lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;UPDATE 2013-05-09:&lt;/strong&gt; I've added a section on how to add swap space to EC2.
+&lt;p&gt;&lt;strong&gt;UPDATE 2013-05-09:&lt;/strong&gt; I&amp;#39;ve added a section on how to add swap space to EC2.
 This can alleviate problems encountered when more than a couple of players are
 on the server.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-
 &lt;h3&gt;Setup&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;(This post assumes that you already have a running instance. If you are interested in setting up your own EC2 Instance from scratch, have a look at &lt;a href=&quot;http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/&quot;&gt;http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/&lt;/a&gt;. It also shows you how to setup an OpenVPN server.)&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;As it is my first Minecraft server, I decided to use the vanilla server from &lt;a href=&quot;http://www.minecraft.net/download.jsp&quot;&gt;Mojang Specifications&lt;/a&gt;. It isn't as feature-packed as others like HeyO, but it is relatively simple to get going. My instance (Ubuntu Server 10.04, ami-4a0df923 on EC2) didn't have the Java Runtime Environment pre-installed, so I installed it using apt-get:&lt;/p&gt;
+&lt;p&gt;As it is my first Minecraft server, I decided to use the vanilla server from &lt;a href=&quot;http://www.minecraft.net/download.jsp&quot;&gt;Mojang Specifications&lt;/a&gt;. It isn&amp;#39;t as feature-packed as others like HeyO, but it is relatively simple to get going. My instance (Ubuntu Server 10.04, ami-4a0df923 on EC2) didn&amp;#39;t have the Java Runtime Environment pre-installed, so I installed it using apt-get:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install openjdk-6-jre-headless&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install openjdk-6-jre-headless&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I then proceeded to download the latest version of the server:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;At this point, I also made sure that &lt;a href=&quot;http://www.gnu.org/software/screen/&quot;&gt;GNU screen&lt;/a&gt; was installed so I could run minecraft-server in the background between SSH sessions.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install screen&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install screen&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Since I am running the server in a low-memory environment, I adjusted the instructions given on the &lt;a href=&quot;http://www.minecraft.net/download.jsp&quot;&gt;download page&lt;/a&gt; to suit and put it all in a small startup script, start.sh, which I placed in the same directory as minecraft-server.jar:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# Minecraft Server startup script&lt;/span&gt;
-java -Xmx500M -Xms500M -jar minecraft-server.jar nogui
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+java -Xmx500M -Xms500M -jar minecraft-server.jar nogui&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This should allow the server to startup without error. Make sure that start.sh has executable permissions via &lt;code&gt;chmod +x start.sh&lt;/code&gt; .&lt;/p&gt;
 
-&lt;p&gt;Now it's time to start the server with the following commands, replacing &lt;code&gt;/path/to/minecraft-server&lt;/code&gt; with whatever path you downloaded minecraft-server.jar to:&lt;/p&gt;
+&lt;p&gt;Now it&amp;#39;s time to start the server with the following commands, replacing &lt;code&gt;/path/to/minecraft-server&lt;/code&gt; with whatever path you downloaded minecraft-server.jar to:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;screen -DR&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;screen -DR&lt;/span&gt;
 &lt;span class=&quot;go&quot;&gt;cd /path/to/minecraft-server&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;./start.sh&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;go&quot;&gt;./start.sh&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;p&gt;You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server's public IP address.&lt;/p&gt;
+&lt;p&gt;You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server&amp;#39;s public IP address. &lt;/p&gt;
 
 &lt;h3&gt;Setting up Swap Space&lt;/h3&gt;
 
@@ -178,64 +165,59 @@ java -Xmx500M -Xms500M -jar minecraft-server.jar nogui
 adding some swap space to supplement the RAM. I found the following script
 to do just that (copy &amp;amp; paste it into a file called swap.sh):&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash -e&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash -e&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# Set default variable values&lt;/span&gt;
 : &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SWAP_SIZE_MEGABYTES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:=1024&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
 : &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:=/var/swap.space&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt; SWAP_SIZE_MEGABYTES &amp;lt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;No swap size provided, exiting.&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt; SWAP_SIZE_MEGABYTES &amp;lt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;No swap size provided, exiting.&amp;#39;&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
 &lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; already exists,  skipping.  
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; already exists,  skipping.  
 &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; ! swapon -s &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -qF &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Creating &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_SIZE_MEGABYTES&amp;quot;&lt;/span&gt;MB.
-    dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1024 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Creating &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_SIZE_MEGABYTES&amp;quot;&lt;/span&gt;MB.
+    dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1024&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
         &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$((&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_SIZE_MEGABYTES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;))&lt;/span&gt;
     mkswap &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;    
     swapon &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Swap status:&amp;#39;&lt;/span&gt;
     swapon -s
 &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Swap &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; file already on.
+    &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Swap &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; file already on.
 &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
 
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Done.&amp;#39;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Done.&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Next, run the following commands:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;chmod a+x swap.sh &lt;span class=&quot;c&quot;&gt;# allows the script file to be executed as a program&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;chmod a+x swap.sh &lt;span class=&quot;c&quot;&gt;# allows the script file to be executed as a program&lt;/span&gt;
 sudo su &lt;span class=&quot;c&quot;&gt;# the script needs root priveledges so we need to switch users to root&lt;/span&gt;
-./swap.sh &lt;span class=&quot;c&quot;&gt;# runs the script&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+./swap.sh &lt;span class=&quot;c&quot;&gt;# runs the script&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;That should give you an extra buffer of memory to work with.&lt;/p&gt;
 
 &lt;h3&gt;Practicality&lt;/h3&gt;
 
-&lt;p&gt;The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it's only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the &lt;a href=&quot;http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud&quot;&gt;guide&lt;/a&gt; at Stratum Security, you'll have a nice little OpenVPN server too.&lt;/p&gt;
+&lt;p&gt;The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it&amp;#39;s only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the &lt;a href=&quot;http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud&quot;&gt;guide&lt;/a&gt; at Stratum Security, you&amp;#39;ll have a nice little OpenVPN server too.&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>The Dawn of a New Blog</title>
    <link href="http://www.brandonsilver.com/2011/02/08/the-dawn-of-a-new-blog.html"/>
-   <updated>2011-02-08T00:00:00-07:00</updated>
+   <updated>2011-02-08T00:00:00-06:00</updated>
    <id>http://www.brandonsilver.com/2011/02/08/the-dawn-of-a-new-blog</id>
-   <content type="html">&lt;p&gt;Another day, another new blog setup. As you may or may not have noticed, I've switched from Wordpress to a new, more lightweight system called Jekyll. It'll allow me the freedom to write up my posts how I see fit and (hopefully) finally give me the motivation to learn some HTML and CSS.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Another day, another new blog setup. As you may or may not have noticed, I&amp;#39;ve switched from Wordpress to a new, more lightweight system called Jekyll. It&amp;#39;ll allow me the freedom to write up my posts how I see fit and (hopefully) finally give me the motivation to learn some HTML and CSS. &lt;/p&gt;
 
 &lt;!--more--&gt;
 
+&lt;p&gt;I first learned about Jekyll from &lt;a href=&quot;http://paulstamatiou.com/how-to-wordpress-to-jekyll&quot;&gt;Paul Stamatiou&amp;#39;s Blog&lt;/a&gt;. Its support for a variety of markup languages (including markdown) and lack of a requirement for a database sold me on the idea. I have long desired a completely &amp;quot;flat&amp;quot; replacement for Wordpress, and Jekyll looked like just the ticket.&lt;/p&gt;
 
-&lt;p&gt;I first learned about Jekyll from &lt;a href=&quot;http://paulstamatiou.com/how-to-wordpress-to-jekyll&quot;&gt;Paul Stamatiou's Blog&lt;/a&gt;. Its support for a variety of markup languages (including markdown) and lack of a requirement for a database sold me on the idea. I have long desired a completely &quot;flat&quot; replacement for Wordpress, and Jekyll looked like just the ticket.&lt;/p&gt;
-
-&lt;p&gt;The initial setup wasn't too dificult. Even with my somewhat limited understanding of web development, I was able to follow along Paul's excellent post, creating a local development environment and using Github to clone a popular &lt;a href=&quot;https://github.com/mojombo/tpw&quot;&gt;Jekyll repository&lt;/a&gt;. A few dozen modifications later, and a new blog is born in lightweight and beautiful static HTML.&lt;/p&gt;
+&lt;p&gt;The initial setup wasn&amp;#39;t too dificult. Even with my somewhat limited understanding of web development, I was able to follow along Paul&amp;#39;s excellent post, creating a local development environment and using Github to clone a popular &lt;a href=&quot;https://github.com/mojombo/tpw&quot;&gt;Jekyll repository&lt;/a&gt;. A few dozen modifications later, and a new blog is born in lightweight and beautiful static HTML. &lt;/p&gt;
 </content>
  </entry>
  
