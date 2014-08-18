@@ -33,6 +33,11 @@ title: Useful links
    * CS 4243 CS Security Algorithms
    * STAT 4033 Engineering Statistics
    * MATH 4033 History of Math
+ * [2014 Fall](https://www.evernote.com/pub/bas1/2014fall)
+   * CS 3513 Numerical Methods for Digital Computers
+   * CS 4323 Design & Implementation of Operating Systems I
+   * MSIS 4243 Digitial Forensic Analysis
+   * CS 4153 Mobile Applications Development
 
 ### Development Resources ###
 [OverAPI.com](http://overapi.com/) *Lots of computer-related cheat sheets*   
