@@ -14,6 +14,8 @@ purpose of this post is purely exploratory and meant for defensive purposes, and
 1337 hax0ring. If you use the knowledge below for bad, don't blame me when the feds' party van comes
 for you. Your actions are your own.
 
+*Last updated on 2014-01-07 17:25 CST*
+
 ### Introduction ###
 
 I manage a few WordPress websites in my spare time. Most of the sites don't have comments enabled,
@@ -62,11 +64,9 @@ the page and fill it with the wordpress installation's plugin editor in order to
 <code>hello.php</code> plugin. If the desired changes have already been made, then it will instead
 set the iframe to run the modified <code>hello.php</code> script.
 
-### De-obfuscating the JavaScript's PHP payload ###
-
-But what are those changes? The answer might be found by decoding the base-64
-string inside of <code>hhh.getElementById("newcontent").value = atob(...);</code>, since that's what
-is being added to <code>hello.php</code>. 
+But what are those changes? I found the answer by decoding a base-64 string that was being added (in
+decoded form) to <code>hello.php</code>. It turned out to be a chunk of PHP that serves to exploit
+incorrect file permission settings to allow for arbitrary remote code execution. 
 
 ### Overview of the modifications to hello.php ###
 
@@ -87,7 +87,8 @@ if (isset($_REQUEST['FILE'])){
 It appears that by adding this code the attacker can execute arbitrary code contained in a
 specially-crafted request to <code>wp-config.php</code>. Specifically, any request with the 'FILE'
 variable set will execute the code supplied by the request variable with the same name as a unique
-ID generated previously in the script.
+ID generated previously in the script. This provides the attacker with the ability to limit access
+to this exploit. 
 
 Next, the script moves to correct the permissions of <code>wp-config.php</code> in order to prevent
 other attackers from gaining control (a consistent theme in this script, as will be shown below).
@@ -156,12 +157,11 @@ as a boundary marker to indicate where the malicious script ends and the origina
 ### Summary ###
 
 This exploit originates as a comment designed to look like the default WordPress post. The first
-time it's viewed it runs some JavaScript which adds the PHP listed above to a plugin,
+time it's viewed it runs some JavaScript which adds the PHP previously described to a plugin,
 <code>hello.php</code>. The second time the comment is viewed it executes the plugin, in turn
 running code that
 
- 1. injects more PHP into the WordPress installation's settings file,
-<code>wp-config.php</code>,
+ 1. injects more PHP into the WordPress installation's settings file, <code>wp-config.php</code>,
  2. sends information back to the attackers (allowing them to execute
 arbitrary code with a specially-crafted request using the injected code from 1.),
  3. removes the comment, and
@@ -175,7 +175,12 @@ WordPress site to be vulnerable to it. It seems to require the following to be t
  1. Commenting must be enabled
  2. Commenting must be open to everyone
  3. Comments must be automatically approved (no moderation queue)
- 4. The web server must be able to write to the WordPress installation directory
+ 4. The web server (or whatever entity is running WordPress) must be able to write to the WordPress
+    installation directory
+
+Number 4 is the big one, since many folks installing WordPress themselves can make the easy mistake
+of using incorrect file system permissions.
+
 
 ### Final thoughts ###
 
