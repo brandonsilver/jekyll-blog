@@ -3,7 +3,7 @@
  <title>BrandonSilver.com</title>
  <link href="http://www.brandonsilver.com/atom.xml" rel="self"/>
  <link href="http://www.brandonsilver.com/"/>
- <updated>2015-01-07T07:13:18-06:00</updated>
+ <updated>2015-01-07T17:24:22-06:00</updated>
  <id>http://www.brandonsilver.com/</id>
  <author>
    <name>Brandon Silver</name>
@@ -20,6 +20,8 @@
 purpose of this post is purely exploratory and meant for defensive purposes, and not as an intro to
 1337 hax0ring. If you use the knowledge below for bad, don&amp;#39;t blame me when the feds&amp;#39; party van comes
 for you. Your actions are your own.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Last updated on 2014-01-07 17:25 CST&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3&gt;Introduction&lt;/h3&gt;
 
@@ -67,11 +69,9 @@ the page and fill it with the wordpress installation&amp;#39;s plugin editor in 
 &lt;code&gt;hello.php&lt;/code&gt; plugin. If the desired changes have already been made, then it will instead
 set the iframe to run the modified &lt;code&gt;hello.php&lt;/code&gt; script.&lt;/p&gt;
 
-&lt;h3&gt;De-obfuscating the JavaScript&amp;#39;s PHP payload&lt;/h3&gt;
-
-&lt;p&gt;But what are those changes? The answer might be found by decoding the base-64
-string inside of &lt;code&gt;hhh.getElementById(&amp;quot;newcontent&amp;quot;).value = atob(...);&lt;/code&gt;, since that&amp;#39;s what
-is being added to &lt;code&gt;hello.php&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;But what are those changes? I found the answer by decoding a base-64 string that was being added (in
+decoded form) to &lt;code&gt;hello.php&lt;/code&gt;. It turned out to be a chunk of PHP that serves to exploit
+incorrect file permission settings to allow for arbitrary remote code execution. &lt;/p&gt;
 
 &lt;h3&gt;Overview of the modifications to hello.php&lt;/h3&gt;
 
@@ -98,7 +98,8 @@ settings for WordPress sites (like database access credentials). The script inje
 &lt;p&gt;It appears that by adding this code the attacker can execute arbitrary code contained in a
 specially-crafted request to &lt;code&gt;wp-config.php&lt;/code&gt;. Specifically, any request with the &amp;#39;FILE&amp;#39;
 variable set will execute the code supplied by the request variable with the same name as a unique
-ID generated previously in the script.&lt;/p&gt;
+ID generated previously in the script. This provides the attacker with the ability to limit access
+to this exploit. &lt;/p&gt;
 
 &lt;p&gt;Next, the script moves to correct the permissions of &lt;code&gt;wp-config.php&lt;/code&gt; in order to prevent
 other attackers from gaining control (a consistent theme in this script, as will be shown below).
@@ -163,13 +164,12 @@ as a boundary marker to indicate where the malicious script ends and the origina
 &lt;h3&gt;Summary&lt;/h3&gt;
 
 &lt;p&gt;This exploit originates as a comment designed to look like the default WordPress post. The first
-time it&amp;#39;s viewed it runs some JavaScript which adds the PHP listed above to a plugin,
+time it&amp;#39;s viewed it runs some JavaScript which adds the PHP previously described to a plugin,
 &lt;code&gt;hello.php&lt;/code&gt;. The second time the comment is viewed it executes the plugin, in turn
 running code that&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;injects more PHP into the WordPress installation&amp;#39;s settings file,
-&lt;code&gt;wp-config.php&lt;/code&gt;,&lt;/li&gt;
+&lt;li&gt;injects more PHP into the WordPress installation&amp;#39;s settings file, &lt;code&gt;wp-config.php&lt;/code&gt;,&lt;/li&gt;
 &lt;li&gt;sends information back to the attackers (allowing them to execute
 arbitrary code with a specially-crafted request using the injected code from 1.),&lt;/li&gt;
 &lt;li&gt;removes the comment, and&lt;/li&gt;
@@ -185,8 +185,12 @@ WordPress site to be vulnerable to it. It seems to require the following to be t
 &lt;li&gt;Commenting must be enabled&lt;/li&gt;
 &lt;li&gt;Commenting must be open to everyone&lt;/li&gt;
 &lt;li&gt;Comments must be automatically approved (no moderation queue)&lt;/li&gt;
-&lt;li&gt;The web server must be able to write to the WordPress installation directory&lt;/li&gt;
+&lt;li&gt;The web server (or whatever entity is running WordPress) must be able to write to the WordPress
+installation directory&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;Number 4 is the big one, since many folks installing WordPress themselves can make the easy mistake
+of using incorrect file system permissions.&lt;/p&gt;
 
 &lt;h3&gt;Final thoughts&lt;/h3&gt;
 

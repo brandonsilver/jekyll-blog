@@ -24,6 +24,8 @@ purpose of this post is purely exploratory and meant for defensive purposes, and
 1337 hax0ring. If you use the knowledge below for bad, don&#39;t blame me when the feds&#39; party van comes
 for you. Your actions are your own.</p>
 
+<p><em>Last updated on 2014-01-07 17:25 CST</em></p>
+
 <h3>Introduction</h3>
 
 <p>I manage a few WordPress websites in my spare time. Most of the sites don&#39;t have comments enabled,
@@ -70,11 +72,9 @@ the page and fill it with the wordpress installation&#39;s plugin editor in orde
 <code>hello.php</code> plugin. If the desired changes have already been made, then it will instead
 set the iframe to run the modified <code>hello.php</code> script.</p>
 
-<h3>De-obfuscating the JavaScript&#39;s PHP payload</h3>
-
-<p>But what are those changes? The answer might be found by decoding the base-64
-string inside of <code>hhh.getElementById(&quot;newcontent&quot;).value = atob(...);</code>, since that&#39;s what
-is being added to <code>hello.php</code>. </p>
+<p>But what are those changes? I found the answer by decoding a base-64 string that was being added (in
+decoded form) to <code>hello.php</code>. It turned out to be a chunk of PHP that serves to exploit
+incorrect file permission settings to allow for arbitrary remote code execution. </p>
 
 <h3>Overview of the modifications to hello.php</h3>
 
@@ -101,7 +101,8 @@ settings for WordPress sites (like database access credentials). The script inje
 <p>It appears that by adding this code the attacker can execute arbitrary code contained in a
 specially-crafted request to <code>wp-config.php</code>. Specifically, any request with the &#39;FILE&#39;
 variable set will execute the code supplied by the request variable with the same name as a unique
-ID generated previously in the script.</p>
+ID generated previously in the script. This provides the attacker with the ability to limit access
+to this exploit. </p>
 
 <p>Next, the script moves to correct the permissions of <code>wp-config.php</code> in order to prevent
 other attackers from gaining control (a consistent theme in this script, as will be shown below).
@@ -166,13 +167,12 @@ as a boundary marker to indicate where the malicious script ends and the origina
 <h3>Summary</h3>
 
 <p>This exploit originates as a comment designed to look like the default WordPress post. The first
-time it&#39;s viewed it runs some JavaScript which adds the PHP listed above to a plugin,
+time it&#39;s viewed it runs some JavaScript which adds the PHP previously described to a plugin,
 <code>hello.php</code>. The second time the comment is viewed it executes the plugin, in turn
 running code that</p>
 
 <ol>
-<li>injects more PHP into the WordPress installation&#39;s settings file,
-<code>wp-config.php</code>,</li>
+<li>injects more PHP into the WordPress installation&#39;s settings file, <code>wp-config.php</code>,</li>
 <li>sends information back to the attackers (allowing them to execute
 arbitrary code with a specially-crafted request using the injected code from 1.),</li>
 <li>removes the comment, and</li>
@@ -188,8 +188,12 @@ WordPress site to be vulnerable to it. It seems to require the following to be t
 <li>Commenting must be enabled</li>
 <li>Commenting must be open to everyone</li>
 <li>Comments must be automatically approved (no moderation queue)</li>
-<li>The web server must be able to write to the WordPress installation directory</li>
+<li>The web server (or whatever entity is running WordPress) must be able to write to the WordPress
+installation directory</li>
 </ol>
+
+<p>Number 4 is the big one, since many folks installing WordPress themselves can make the easy mistake
+of using incorrect file system permissions.</p>
 
 <h3>Final thoughts</h3>
 
@@ -255,7 +259,7 @@ It seems that the same entity might be responsible for both exploits.</p>
                 <div id="clear"></div>
             </div>
             <div id="main_content_bottom"></div>
-            <div id="footer"><strong>Copyright &copy; 2010-2015 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2015-01-07 07:13:18 -0600 </strong></div>
+            <div id="footer"><strong>Copyright &copy; 2010-2015 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2015-01-07 17:24:22 -0600 </strong></div>
         </div>
     </body>
 </html>
