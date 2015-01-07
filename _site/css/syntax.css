@@ -5,6 +5,12 @@
     display: block; 
     overflow-x: auto;
 }
+.highlighttable {
+/*    overflow: scroll; */
+    overflow-y: hidden;
+    display: block;
+    overflow-x: auto;
+}
 .c { color: #999988; font-style: italic } /* Comment */
 .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .k { color: #000000; font-weight: bold } /* Keyword */
