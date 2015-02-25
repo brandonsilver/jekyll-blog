@@ -38,6 +38,10 @@ title: Useful links
    * CS 4323 Design & Implementation of Operating Systems I
    * MSIS 4243 Digitial Forensic Analysis
    * CS 4153 Mobile Applications Development
+ * [2015 Spring](https://www.evernote.com/pub/bas1/2015spring)
+   * CS 4883 Social Issues in Computer Science
+   * MSIS 3333 Database Systems
+   * FIN 2123 Personal Finance
 
 ### Development Resources ###
 [OverAPI.com](http://overapi.com/) *Lots of computer-related cheat sheets*   
