@@ -6,6 +6,7 @@ tags:
 - contact
 - email
 - blog
+- gpg key
 ---
 
 ## Recent Blog Posts ##
@@ -25,11 +26,13 @@ days are mostly centered around exploring the wide world of IT, with some casual
 
 Email: <brandon@brandonsilver.com>
 
-Email is my preferred method of Internet-based communication. You can find my PGP public key
-(ID: <code>D35F71CB</code>) on most public key servers ([like this one](http://pgp.mit.edu/)).
+Email is my preferred method of Internet-based communication. I also make use of GnuPG encryption;
+you can find my public key (ID: <code>8D5F182D</code>) at
+[https://www.brandonsilver.com/gpg-key.asc](https://www.brandonsilver.com/gpg-key.asc) or on public
+key servers like [http://pgp.mit.edu/](http://pgp.mit.edu/).
 
-**UPDATE 2014-07-26:** I forgot the passphrase to my PGP private key, so I've generated a new
-keypair.
+**UPDATE 2015-02-25:** I have again forgotten the passphrase to my private key, so I've uploaded a
+new one. See above for the details.
 
 ### Social media ###
 Facebook: [brandon.silver2](https://www.facebook.com/brandon.silver2)  
