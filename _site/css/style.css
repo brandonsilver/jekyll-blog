@@ -4,7 +4,7 @@ body {
 }
 #container {
 	margin: 0 auto;
-	width: 880px
+	width: 920px
 }
 #header {
 	width: 100%
@@ -50,7 +50,7 @@ body {
 	margin-left: 20px;
 }
 .menu {
-	width: 139px;
+	width: 160px;
 	float: left;
 	padding: 0 20px 0 20px;
 	border-left: #8C8484 1px solid;
