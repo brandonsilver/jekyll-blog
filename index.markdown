@@ -11,9 +11,11 @@ tags:
 
 ## Recent Blog Posts ##
 <p>
-  {% for post in site.posts limit:5 %}
-    <li>{{ post.date | date_to_string }} &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
+    <ul>
+        {% for post in site.posts limit:5 %}
+        <li>{{ post.date | date_to_string }} &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
 </p>
 
 ## About Me ##
