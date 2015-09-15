@@ -1,11 +1,7 @@
 body {
-    margin:40px auto 10px;
-    max-width:750px;
-    line-height:1.6;
-    font-size:16px;
+    font-size:15px;
     font-family:"DejaVu Serif",serif;
     color:#444;
-    padding:0 10px;
 }
 
 #header h1 {
@@ -14,7 +10,25 @@ body {
 
 #header {
     line-height: 1.0;
-    padding: 0px 0px 20px;
+    padding: 0px 0px 10px;
+}
+
+#navbar {
+    padding: 5px 0px 5px;
+    margin: 10px auto 10px;
+    border-top-style: dashed;
+    border-top-width: 2px;
+    border-bottom-style: dashed;
+    border-bottom-width: 2px;
+    font-family: "DejaVu Sans",sans-serif;
+    font-size: 12px;
+}
+
+#content {
+    margin:10px auto 10px 0px;
+    max-width:750px;
+    line-height:1.6;
+    padding:0 10px;
 }
 
 a:link {
@@ -34,16 +48,13 @@ a:active {
     text-decoration: underline;
 }
 
-h1,h2,h3 {
+h1,h2 {
     line-height:1.2
 }
 
-h1,h2,h3,h4 {
+h3,h4 {
     font-family: "DejaVu Sans",sans-serif;
-}
-
-.nav-back_to_home {
-    font-size: 16px;
+    line-height: 1.0;
 }
 
 pre {
@@ -55,7 +66,10 @@ pre {
 }
 
 #footer {
+    border-top-style: dashed;
+    border-top-width: 2px;
     font-size: 12px;
+    text-align: center;
     padding: 20px 0px 0px;
-    margin: auto 40px;
+    //margin: auto 40px;
 }
