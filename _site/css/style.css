@@ -1,12 +1,12 @@
 body {
-    font-size:15px;
+    font-size:16px;
     font-family:"DejaVu Serif",serif;
-    color:#444;
+    /* color:#444; */
 }
 
 #page { 
     margin: 40px auto; 
-    max-width: 750px;
+    max-width: 850px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
@@ -19,6 +19,14 @@ body {
     line-height: 0;
 }
 
+#header h1 a:link {
+    color: black;
+}
+
+#header h1 a:visited {
+    color: black;
+}
+
 #header {
     line-height: 1.0;
     padding: 0px 0px 10px;
@@ -26,19 +34,31 @@ body {
 
 nav {
     padding: 5px 0px 5px;
-    margin: 10px auto 10px;
+    margin: 10px auto 20px;
     border-top-style: dashed;
     border-top-width: 2px;
     border-bottom-style: dashed;
     border-bottom-width: 2px;
     font-family: "DejaVu Sans",sans-serif;
-    font-size: 12px;
+    font-size: 14px;
+}
+
+.nav-label {
+    font-weight: 100;
+    font-style: italic;
 }
 
 #content {
     /*margin:10px auto 10px 0px; */
     /*max-width:750px; */
     line-height:1.6; 
+}
+
+.post_date {
+    color: grey;
+    padding-top: 20px;
+    font-size: 18px;
+    line-height: 0.0;
 }
 
 a:link {
