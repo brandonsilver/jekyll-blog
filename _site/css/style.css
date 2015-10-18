@@ -11,12 +11,13 @@ body {
 }
 
 #page-content {
-    padding: 20px 50px 20px 50px;
-    /*max-width: 650px; */
+    padding: 10px 0px 10px 0px;
+    max-width: 750px;
+    margin:0px auto 0px;
 }
 
 #header h1 {
-    line-height: 0;
+    /*line-height: 0;*/
 }
 
 #header h1 a:link {
@@ -28,7 +29,7 @@ body {
 }
 
 #header {
-    line-height: 1.0;
+    line-height: 0.0;
     padding: 0px 0px 10px;
 }
 
@@ -49,9 +50,8 @@ nav {
 }
 
 #content {
-    /*margin:10px auto 10px 0px; */
-    /*max-width:750px; */
-    line-height:1.6; 
+    line-height: 1.6; 
+    text-align: justify;
 }
 
 .post_date {
@@ -109,5 +109,4 @@ pre {
     font-size: 12px;
     text-align: center;
     padding: 20px 0px 0px;
-    /* margin: auto 40px; */
 }
