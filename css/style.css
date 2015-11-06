@@ -1,17 +1,28 @@
 body {
-    font-size:16px;
+    font-size:14px;
     font-family:"DejaVu Serif",serif;
     /* color:#444; */
 }
 
-#page { 
-    margin: 40px auto; 
-    max-width: 850px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+#sidebar-container {
+    margin: 0px;
+    /*display: inline;*/
+    float: left;
+    width: 160px;
+    font-size: 14px;
+    color: grey;
+}
+
+#sidebar-container a:link {
+    color: grey;
+}
+
+.sidebar-header {
+    font-weight: 800;
 }
 
 #page-content {
-    padding: 10px 0px 10px 0px;
+/*    padding: 10px 0px 10px 0px; */
     max-width: 750px;
     margin:0px auto 0px;
 }
@@ -50,6 +61,7 @@ nav {
 }
 
 #content {
+    margin-left: 170px; 
     line-height: 1.6; 
     text-align: justify;
 }

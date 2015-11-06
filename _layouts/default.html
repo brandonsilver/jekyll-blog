@@ -10,21 +10,27 @@
         <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
     </head>
     <body>
-        <div id="page">
-            <div id="page-content">
             <div id="header"><h1><a href="http://www.brandonsilver.com">www.BrandonSilver.com</a></h1>
             ... writings and miscellaneous musings
             </div>
-            <nav><span class="nav-label">This Website: </span><a href="/index.html">Home</a> | <a
-                        href="/links.html">Useful Links</a> | <a href="/archives.html">Blog</a></nav>
+            <nav><a href="/index.html">Home</a> | <a href="/links.html">Useful Links</a> | <a
+                        href="/archives.html">Blog</a></nav>
+
+        <div id="sidebar-container" class="sidebar">
+            <span class="sidebar-header">Contact Info</span>
+            <li><a href="mailto:brandon@brandonsilver.com">Email</a></li>
+            <li><a href="https://keybase.io/brandonsilver/">Keybase</a></li>
+            <li><a href="https://www.twitter.com/alinuxuser">@alinuxuser</a></li>
+            <br/>
+            <span class="sidebar-header">Blog Posts</span>
+            {% for post in site.posts %}
+            <li><a href=" {{ post.url }} "> {{ post.title }} </a></li>
+            {% endfor %}
+        </div>
             <div id="content">
                 {{ content}}
             </div>
-            <!--
-                        <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/alinuxuser"  data-widget-id="315684609713127424">Tweets by @alinuxuser</a>
-                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> -->
+
             <div id="footer"><strong>Copyright &copy; 2010-2015 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> {{ site.time }} </strong></div>
-            </div>
-        </div>
     </body>
 </html>
