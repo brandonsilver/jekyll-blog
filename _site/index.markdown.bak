@@ -4,8 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="The personal website of Brandon Silver." />
-        <meta name="keywords" content="" />
-        <title>syntax test | www.BrandonSilver.com</title>
+        <meta name="keywords" content="brandon silver,contact,email,blog,gpg key" />
+        <title>Home | www.BrandonSilver.com</title>
         <link rel="stylesheet" href="/css/style.css" type="text/css" />
         <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
     </head>
@@ -23,17 +23,44 @@
             <nav><span class="nav-label">This Website: </span><a href="/index.html">Home</a> | <a
                         href="/links.html">Useful Links</a> | <a href="/archives.html">Blog</a></nav>
             <div id="content">
-                <p>This is just a test of pygment&#39;s syntax highligher.</p>
+                ## Recent Blog Posts ##
+<p>
+    <ul>
+        
+        <li>07 Jan 2015 &raquo; <a href="/2015/01/07/exploring-malicious-wordpress-spam.html">Exploring malicious wordpress comment spam</a></li>
+        
+        <li>31 Mar 2013 &raquo; <a href="/2013/03/31/Major-site-overhaul.html">Major site overhaul</a></li>
+        
+        <li>16 Feb 2012 &raquo; <a href="/2012/02/16/New-Notes-Website.html">New Notes Website</a></li>
+        
+        <li>16 Jul 2011 &raquo; <a href="/2011/07/16/Summer-Update.html">Summer Update</a></li>
+        
+        <li>30 May 2011 &raquo; <a href="/2011/05/30/And-we're-back!.html">And we're back!</a></li>
+        
+    </ul>
+</p>
 
-<p>This will print out the string &quot;Hello, World!&quot; when the program is run.</p>
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloPrinter</span>
-<span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
-    <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
+
+## About Me ##
+Hello there! I'm a recently-graduated student of Computer Science currently working in web
+development. My interests include amatuer 
+
+
+## Contact Info ##
+
+Email: <brandon@brandonsilver.com>
+
+Email is my preferred method of Internet-based communication. I also make use of GnuPG encryption;
+you can find my public key (ID: <code>8D5F182D</code>) at
+[https://www.brandonsilver.com/gpg-key.asc](https://www.brandonsilver.com/gpg-key.asc) or on public
+key servers like [http://pgp.mit.edu/](http://pgp.mit.edu/).
+
+
+### Social media ###
+Facebook: [brandon.silver2](https://www.facebook.com/brandon.silver2)  
+Twitter: [@alinuxuser](https://twitter.com/alinuxuser)  
+Google+: [Brandon Silver](https://plus.google.com/117497136737421548137/posts)
+
             </div>
             <div id="twitter-widget">
             </div>

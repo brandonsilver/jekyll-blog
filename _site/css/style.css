@@ -1,11 +1,17 @@
 body {
-    font-size:16px;
+    font-size:14px;
     font-family:"DejaVu Serif",serif;
     /* color:#444; */
 }
 
+#sidebar {
+    float: left;
+    max-width: 150px;
+    font-family: "DejaVu Sans",sans;
+}
+
 #page { 
-    margin: 40px auto; 
+    margin: 15px auto 15px 190px; 
     max-width: 850px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
@@ -52,6 +58,10 @@ nav {
 #content {
     line-height: 1.6; 
     text-align: justify;
+}
+
+#twitter-widget {
+    text-align: center;
 }
 
 .post_date {
