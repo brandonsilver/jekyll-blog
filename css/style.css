@@ -1,5 +1,5 @@
 body {
-    font-size:14px;
+    font-size:16px;
     font-family:"DejaVu Serif",serif;
     /* color:#444; */
 }
@@ -12,6 +12,7 @@ body {
 
 #page { 
     margin: 15px auto 15px 190px; 
+    min-width: 400px;
     max-width: 850px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
@@ -57,7 +58,7 @@ nav {
 
 #content {
     line-height: 1.6; 
-    text-align: justify;
+    /* text-align: justify; */
 }
 
 #twitter-widget {
