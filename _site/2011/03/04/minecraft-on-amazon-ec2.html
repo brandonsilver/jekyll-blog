@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="description" content="The personal website of Brandon Silver." />
         <meta name="keywords" content="servers,linux,minecraft,ec2" />
         <title>Minecraft Server on an Amazon EC2 Micro Instance | www.BrandonSilver.com</title>
@@ -19,90 +19,89 @@
 <h2><a href="  "> Minecraft Server on an Amazon EC2 Micro Instance </a></h2>
 
 
-<p>Over the past couple of weeks, I&#39;ve been using my free Amazon EC2 Micro instance as a <a href="http://www.minecraft.net">Minecraft</a> server. It isn&#39;t ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience. </p>
+<p>Over the past couple of weeks, I’ve been using my free Amazon EC2 Micro instance as a <a href="http://www.minecraft.net">Minecraft</a> server. It isn’t ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience.</p>
 
-<p><strong>UPDATE 2013-05-09:</strong> I&#39;ve added a section on how to add swap space to EC2.
+<p><strong>UPDATE 2013-05-09:</strong> I’ve added a section on how to add swap space to EC2.
 This can alleviate problems encountered when more than a couple of players are
 on the server.</p>
 
 <!--more-->
 
-<h3>Setup</h3>
+<h3 id="setup">Setup</h3>
 
 <p><em>(This post assumes that you already have a running instance. If you are interested in setting up your own EC2 Instance from scratch, have a look at <a href="http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/">http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/</a>. It also shows you how to setup an OpenVPN server.)</em></p>
 
-<p>As it is my first Minecraft server, I decided to use the vanilla server from <a href="http://www.minecraft.net/download.jsp">Mojang Specifications</a>. It isn&#39;t as feature-packed as others like HeyO, but it is relatively simple to get going. My instance (Ubuntu Server 10.04, ami-4a0df923 on EC2) didn&#39;t have the Java Runtime Environment pre-installed, so I installed it using apt-get:</p>
+<p>As it is my first Minecraft server, I decided to use the vanilla server from <a href="http://www.minecraft.net/download.jsp">Mojang Specifications</a>. It isn’t as feature-packed as others like HeyO, but it is relatively simple to get going. My instance (Ubuntu Server 10.04, ami-4a0df923 on EC2) didn’t have the Java Runtime Environment pre-installed, so I installed it using apt-get:</p>
 
-<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo apt-get install openjdk-6-jre-headless</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-console" data-lang="console">sudo apt-get install openjdk-6-jre-headless</code></pre></figure>
 
 <p>I then proceeded to download the latest version of the server:</p>
 
-<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-console" data-lang="console">wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859</code></pre></figure>
 
 <p>At this point, I also made sure that <a href="http://www.gnu.org/software/screen/">GNU screen</a> was installed so I could run minecraft-server in the background between SSH sessions.</p>
 
-<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo apt-get install screen</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-console" data-lang="console">sudo apt-get install screen</code></pre></figure>
 
 <p>Since I am running the server in a low-memory environment, I adjusted the instructions given on the <a href="http://www.minecraft.net/download.jsp">download page</a> to suit and put it all in a small startup script, start.sh, which I placed in the same directory as minecraft-server.jar:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash</span>
 <span class="c"># Minecraft Server startup script</span>
-java -Xmx500M -Xms500M -jar minecraft-server.jar nogui</code></pre></div>
+java -Xmx500M -Xms500M -jar minecraft-server.jar nogui</code></pre></figure>
 
 <p>This should allow the server to startup without error. Make sure that start.sh has executable permissions via <code>chmod +x start.sh</code> .</p>
 
-<p>Now it&#39;s time to start the server with the following commands, replacing <code>/path/to/minecraft-server</code> with whatever path you downloaded minecraft-server.jar to:</p>
+<p>Now it’s time to start the server with the following commands, replacing <code>/path/to/minecraft-server</code> with whatever path you downloaded minecraft-server.jar to:</p>
 
-<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">screen -DR</span>
-<span class="go">cd /path/to/minecraft-server</span>
-<span class="go">./start.sh</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-console" data-lang="console">screen -DR
+cd /path/to/minecraft-server
+./start.sh</code></pre></figure>
 
-<p>You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server&#39;s public IP address. </p>
+<p>You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server’s public IP address.</p>
 
-<h3>Setting up Swap Space</h3>
-
+<h3 id="setting-up-swap-space">Setting up Swap Space</h3>
 <p>If you run into performance issues when running the server, you can try
 adding some swap space to supplement the RAM. I found the following script
 to do just that (copy &amp; paste it into a file called swap.sh):</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash -e</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/bash -e</span>
 
 <span class="c"># Set default variable values</span>
-: <span class="k">${</span><span class="nv">SWAP_SIZE_MEGABYTES</span><span class="p">:=1024</span><span class="k">}</span>
-: <span class="k">${</span><span class="nv">SWAP_FILE_LOCATION</span><span class="p">:=/var/swap.space</span><span class="k">}</span>
+: <span class="k">${</span><span class="nv">SWAP_SIZE_MEGABYTES</span>:<span class="p">=1024</span><span class="k">}</span>
+: <span class="k">${</span><span class="nv">SWAP_FILE_LOCATION</span>:<span class="p">=/var/swap.space</span><span class="k">}</span>
 
-<span class="k">if</span> <span class="o">((</span> SWAP_SIZE_MEGABYTES &lt;<span class="o">=</span> <span class="m">0</span> <span class="o">))</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s1">&#39;No swap size provided, exiting.&#39;</span>
+<span class="k">if</span> <span class="o">((</span> SWAP_SIZE_MEGABYTES &lt;<span class="o">=</span> 0 <span class="o">))</span>; <span class="k">then
+    </span><span class="nb">echo</span> <span class="s1">'No swap size provided, exiting.'</span>
     <span class="nb">exit </span>1
-<span class="k">elif</span> <span class="o">[</span> -e <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> already exists,  skipping.  
-<span class="k">fi</span>
+<span class="k">elif</span> <span class="o">[</span> -e <span class="s2">"</span><span class="nv">$SWAP_FILE_LOCATION</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$SWAP_FILE_LOCATION</span><span class="s2">"</span> already exists,  skipping.  
+<span class="k">fi
 
-<span class="k">if</span> ! swapon -s <span class="p">|</span> grep -qF <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo </span>Creating <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>, <span class="s2">&quot;$SWAP_SIZE_MEGABYTES&quot;</span>MB.
-    dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span><span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> <span class="nv">bs</span><span class="o">=</span><span class="m">1024</span> <span class="se">\</span>
+if</span> ! swapon -s | grep -qF <span class="s2">"</span><span class="nv">$SWAP_FILE_LOCATION</span><span class="s2">"</span>; <span class="k">then
+    </span><span class="nb">echo </span>Creating <span class="s2">"</span><span class="nv">$SWAP_FILE_LOCATION</span><span class="s2">"</span>, <span class="s2">"</span><span class="nv">$SWAP_SIZE_MEGABYTES</span><span class="s2">"</span>MB.
+    dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span><span class="s2">"</span><span class="nv">$SWAP_FILE_LOCATION</span><span class="s2">"</span> <span class="nv">bs</span><span class="o">=</span>1024 <span class="se">\</span>
         <span class="nv">count</span><span class="o">=</span><span class="k">$((</span><span class="nv">$SWAP_SIZE_MEGABYTES</span><span class="o">*</span><span class="m">1024</span><span class="k">))</span>
-    mkswap <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>    
-    swapon <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span>
-    <span class="nb">echo</span> <span class="s1">&#39;Swap status:&#39;</span>
+    mkswap <span class="s2">"</span><span class="nv">$SWAP_FILE_LOCATION</span><span class="s2">"</span>    
+    swapon <span class="s2">"</span><span class="nv">$SWAP_FILE_LOCATION</span><span class="s2">"</span>
+    <span class="nb">echo</span> <span class="s1">'Swap status:'</span>
     swapon -s
-<span class="k">else</span>
-    <span class="nb">echo </span>Swap <span class="s2">&quot;$SWAP_FILE_LOCATION&quot;</span> file already on.
-<span class="k">fi</span>
+<span class="k">else
+    </span><span class="nb">echo </span>Swap <span class="s2">"</span><span class="nv">$SWAP_FILE_LOCATION</span><span class="s2">"</span> file already on.
+<span class="k">fi
 
-<span class="nb">echo</span> <span class="s1">&#39;Done.&#39;</span></code></pre></div>
+</span><span class="nb">echo</span> <span class="s1">'Done.'</span></code></pre></figure>
 
 <p>Next, run the following commands:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">chmod a+x swap.sh <span class="c"># allows the script file to be executed as a program</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">chmod a+x swap.sh <span class="c"># allows the script file to be executed as a program</span>
 sudo su <span class="c"># the script needs root priveledges so we need to switch users to root</span>
-./swap.sh <span class="c"># runs the script</span></code></pre></div>
+./swap.sh <span class="c"># runs the script</span></code></pre></figure>
 
 <p>That should give you an extra buffer of memory to work with.</p>
 
-<h3>Practicality</h3>
+<h3 id="practicality">Practicality</h3>
 
-<p>The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it&#39;s only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the <a href="http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud">guide</a> at Stratum Security, you&#39;ll have a nice little OpenVPN server too.</p>
+<p>The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it’s only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the <a href="http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud">guide</a> at Stratum Security, you’ll have a nice little OpenVPN server too.</p>
 
 
 <div id="disqus_thread"></div>
@@ -146,7 +145,7 @@ sudo su <span class="c"># the script needs root priveledges so we need to switch
                 <div id="clear"></div>
             </div>
             <div id="main_content_bottom"></div>
-            <div id="footer"><strong>Copyright &copy; 2010-2015 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2015-05-29 01:32:04 -0500 </strong></div>
+            <div id="footer"><strong>Copyright &copy; 2010-2015 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2016-02-20 21:52:36 -0600 </strong></div>
         </div>
     </body>
 </html>

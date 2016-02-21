@@ -4,8 +4,10 @@
     overflow-y: hidden;
     display: block; 
     overflow-x: auto;
+    margin-left: 0px;
+    margin-right: 0px;
 }
-.highlighttable {
+.highlight table {
 /*    overflow: scroll; */
     overflow-y: hidden;
     display: block;
