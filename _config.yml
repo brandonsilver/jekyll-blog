@@ -1,3 +1,8 @@
-highlighter: rouge
+name: Brandon Silver
+description: "An infrequently updated blog by a *NIX-loving software developer."
 
-description: "An infrequently updated blog covering UNIX systems administration, photograpy, and everything in between."
+github: brandonsilver
+twitter: alinuxuser
+keybase: brandonsilver
+
+highlighter: rouge

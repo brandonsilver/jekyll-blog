@@ -1,22 +1,91 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="description" content="The personal website of Brandon Silver." />
-        <meta name="keywords" content="servers,linux,minecraft,ec2" />
-        <title>Minecraft Server on an Amazon EC2 Micro Instance | www.BrandonSilver.com</title>
-        <link rel="stylesheet" href="/css/style.css" type="text/css" />
-        <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
-    </head>
-    <body>
-        <div id="container">
-            <div id="header"><h1><a href="http://www.brandonsilver.com">www.BrandonSilver.com</a></h1></div>
-            <div id="sub_header">... writings and miscellaneous musings</div>
-            <div id="main_content_top"></div>
-            <div id="main_content">
-                <div class="content">
-                    <span class="post_date"> 04 March 2011 </span>
-<h2><a href="  "> Minecraft Server on an Amazon EC2 Micro Instance </a></h2>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Minecraft Server on an Amazon EC2 Micro Instance | Brandon Silver </title>
+    <!-- <link href="/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="/css/theme.css" rel="stylesheet">
+  </head>
+
+  <body>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brandon Silver</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            
+             
+                
+                     
+                
+                    
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                
+             
+                
+                    
+                    <li class="active">
+                        <a href="/blog.html">Blog</a>
+                    </li>
+                    
+                
+             
+                
+                    
+                    <li>
+                        <a href="/archives.html">Archives</a>
+                    </li>
+                    
+                
+             
+                
+                    
+                    <li>
+                        <a href="/links.html">Useful links</a>
+                    </li>
+                    
+                
+            
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li><a href="https://github.com/brandonsilver" target="_blank"><span class="fa fa-github"></span> Github</a></li>
+                
+                
+                <li><a href="https://twitter.com/alinuxuser" target="_blank"><span class="fa fa-twitter"></span> Twitter</a></li>
+                
+                
+                <li><a href="https://keybase.io/brandonsilver" target="_blank"><span class="fa fa-lock"></span> Keybase.io</a></li>
+                
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+      <div id="wrap"> <!-- part of how the sticky footer works -->
+          <div class="container"> <!-- open main container -->
+
+
+      <ol class="breadcrumb">
+    <li><a href="/blog.html">Blog</a></li>
+    <li class="active">Minecraft Server on an Amazon EC2 Micro Instance</li>
+</ol>
+
+<span class="post_date"> 04 March 2011 </span>
+<h2 class="post"><a href="  "> Minecraft Server on an Amazon EC2 Micro Instance </a></h2>
 
 
 <p>Over the past couple of weeks, I’ve been using my free Amazon EC2 Micro instance as a <a href="http://www.minecraft.net">Minecraft</a> server. It isn’t ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience.</p>
@@ -123,29 +192,20 @@ sudo su <span class="c"># the script needs root priveledges so we need to switch
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
-                </div>
-                <div class="menu">
-                    <div class="menu_title">This website</div>
-                    <ul>
-                        <li><a href="/index.html" class="menu_link">Home</a></li>
-                        <li><a href="/archives.html" class="menu_link">Blog Archives</a></li>
-                        <li><a href="/links.html" class="menu_link">Useful Links</a></li>
-                        <li><a href="/atom.xml" class="menu_link">Subscribe via RSS!</a></li>
-                        </ul>
-                        <div class ="menu_title">My web presence</div>
-                        <ul>
-                            <li><a href="https://keybase.io/brandonsilver/" class="menu_link">keybase.io/brandonsilver</a></li>
-                            <li><a href="https://github.com/brandonsilver/" class="menu_link">github.com/brandonsilver</a></li>
-                            <li><a href="https://www.facebook.com/brandon.silver2" class="menu_link">facebook.com/brandon.silver2</a></li>
-                            <li><a href="https://www.twitter.com/alinuxuser" class="menu_link">twitter.com/alinuxuser</a></li>
-                        </ul>
-                        <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/alinuxuser"  data-widget-id="315684609713127424">Tweets by @alinuxuser</a>
-                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                </div>
-                <div id="clear"></div>
-            </div>
-            <div id="main_content_bottom"></div>
-            <div id="footer"><strong>Copyright &copy; 2010-2015 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> 2016-02-20 21:52:36 -0600 </strong></div>
+
+        </div> <!-- close main container -->
+    </div> <!-- close wrapper (for sticky footer) -->
+    <div id="push"></div>
+    <div id="footer">
+        <div class="container">
+            <p class="muted">Copyright © 2010-2016 Brandon Silver</p>
         </div>
-    </body>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!-- <script src="/js/bootstrap.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </body>
 </html>
+

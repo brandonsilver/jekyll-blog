@@ -1,0 +1,88 @@
+body {
+	/*font-family: "DejaVu Sans", sans-serif */ 
+    font-size: 16px;
+}
+h2 {
+    font-size: 34px;
+}
+h3 {
+    font-size: 26px;
+}
+
+/* ------- sticky footer ------- */
+/* (from https://getbootstrap.com/2.3.2/examples/sticky-footer.html) */
+html, body {
+    /* can't have padding,margin on html or body elements */
+    height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* negative indent footer by its height */
+    margin: 0 auto -60px;
+}
+
+/* set the fixed height of the footer */
+#push, #footer {
+    height: 60px;
+}
+#footer {
+    background-color: #f5f5f5;
+}
+
+#footer p {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* apply necessary responsive CSS fixes */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+.muted {
+    color: #999999;
+}
+/* ----------------------------- */
+
+
+#disqus_thread {
+	background: #FFFFFF;
+}
+.post_date {
+	font-size: 20px;
+	color: #808080;
+}
+h2.post {
+    margin-top: 5px;
+}
+#clear {
+	display: block;
+	clear: both;
+	width: 100%;
+	height:1px;
+	overflow:hidden;
+}
+.quote {
+	margin: 20px;
+	text-align: center;
+	font-weight: bold;
+	font-style: italic
+}
+
+pre {
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+
+code {
+	font-family: "Courier New", Courier, monospace
+    font-size: 0.9em;
+}

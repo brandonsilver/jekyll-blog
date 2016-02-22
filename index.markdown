@@ -1,5 +1,6 @@
 ---
 layout: default
+weight: 0
 title: Home
 tags:
 - brandon silver
@@ -8,6 +9,13 @@ tags:
 - blog
 - gpg key
 ---
+
+<div class="jumbotron">
+    <h1>Hi there!</h1>
+    <p>I'm a software developer who's currently building helpful web applications. If you're
+    interested in fixing something up, I'm your man!</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
 
 ## Recent Blog Posts ##
 <p>
