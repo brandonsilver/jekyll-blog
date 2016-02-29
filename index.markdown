@@ -10,12 +10,6 @@ tags:
 - gpg key
 ---
 
-<div class="jumbotron">
-    <h1>Hi there!</h1>
-    <p>I'm a software developer who's currently building helpful web applications. If you're
-    interested in fixing something up, I'm your man!</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-</div>
 
 ## Recent Blog Posts ##
 <p>
@@ -25,7 +19,7 @@ tags:
 </p>
 
 ## About Me ##
-Hello there! I'm a senior in Computer Science at Oklahoma State University. My interests these
+Hello there! I'm a graduate of Computer Science from Oklahoma State University. My interests these
 days are mostly centered around exploring the wide world of IT, with some casual
 [photography](http://www.flickr.com/photos/silverimaging/) and video gaming thrown into the mix.
 
@@ -39,10 +33,3 @@ you can find my public key (ID: <code>8D5F182D</code>) at
 [https://www.brandonsilver.com/gpg-key.asc](https://www.brandonsilver.com/gpg-key.asc) or on public
 key servers like [http://pgp.mit.edu/](http://pgp.mit.edu/).
 
-**UPDATE 2015-02-25:** I have again forgotten the passphrase to my private key, so I've uploaded a
-new one. See above for the details.
-
-### Social media ###
-Facebook: [brandon.silver2](https://www.facebook.com/brandon.silver2)  
-Twitter: [@alinuxuser](https://twitter.com/alinuxuser)  
-Google+: [Brandon Silver](https://plus.google.com/117497136737421548137/posts)
