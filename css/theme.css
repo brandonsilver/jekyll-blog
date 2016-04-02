@@ -21,6 +21,17 @@ h3 {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.text-content h4 {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.text-content p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .sidebar {
     /*margin-right: 5px;*/
     background: 
