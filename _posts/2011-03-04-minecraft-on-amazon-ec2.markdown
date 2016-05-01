@@ -10,11 +10,11 @@ tags:
 
 Over the past couple of weeks, I've been using my free Amazon EC2 Micro instance as a [Minecraft](http://www.minecraft.net) server. It isn't ideal, but it works well enough to replace the aging PC I was using before. Plus, I can feel safe allowing people onto the server, as before I would have to expose my home network to the Internet for the same experience. 
 
+<!--more-->
+
 **UPDATE 2013-05-09:** I've added a section on how to add swap space to EC2.
 This can alleviate problems encountered when more than a couple of players are
 on the server.
-
-<!--more-->
 
 ### Setup ###
 

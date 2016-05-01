@@ -12,13 +12,15 @@ tags:
 This past spring break I decided that I *really* needed to dust off my website
 and start using it for what I originally intended: documenting the neat projects
 I work on, writing about the topics that interest me, and serving as a hub for
-my overall Internet presence. The improvements I've made should hopefully put
+my overall Internet presence.
+
+<!--more-->
+
+The improvements I've made should hopefully put
 some momentum behind that. In short, I made some layout changes to the site to
 make it more readable, aquired a Class 2 SSL Certificate from StartSSL, and
 am switching my personal e-mail address to <brandon@brandonsilver.com> (with
 a new GPG key to go with it).
-
-<!--more-->
 
 ### Layout changes ###
 

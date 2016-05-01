@@ -1,34 +1,22 @@
 {% include header.html %}
 
-<ol class="breadcrumb">
-    <li><a href="{{ site.baseurl }}/blog.html">Blog</a></li>
-    <li class="active">{{ page.title }}</li>
-</ol>
-
-<!--<span class="post_date"> {{ page.date | date: "%d %B %Y" }} </span>
-<h2 class="post"><a href=" {{ post.url }} "> {{ page.title }} </a></h2> -->
-
-<div class="row">
-
-    <div class="col-md-8"> 
-        
-        <div class="text-content">
-
-            <div class="page-header">
-                <h1><small>{{ page.date | date: "%d %B %Y" }}</small> <br>
-                    {{ page.title }}
-                </h1>
+      <div class="post-ribbon"></div>
+      <main class="post-main mdl-layout__content">
+        <div class="post-container mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+          <div class="post-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+            <div class="post-crumbs mdl-color-text--grey-500">
+                <a href="{{ site.baseurl }}/blog.html">Blog</a> &gt; {{ page.title }}
             </div>
+            <div class="text-content">
+                <h3><small>{{ page.date | date: "%d %B %Y" }}</small> <br>
+                    {{ page.title }}
+                </h3>
 
-            {{ content }}
-
+                {{ content }} 
+            </div>
+            {% include disqus.html %}
+          </div>
         </div>
-    </div>
-
-    {% include sidebar.html %}
-
-</div>
-
-{% include disqus.html %}
 
 {% include footer.html %}

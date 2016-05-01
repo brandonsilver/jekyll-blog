@@ -9,6 +9,11 @@ tags:
  - encryption
 ---
 
+I found an interesting piece of WordPress malware. In this post, I'll dig into the nitty-gritty of
+how it works.
+
+<!--more-->
+
 **DISCLAIMER:** The contents of this post may contain code that is unsafe to run. The
 purpose of this post is purely exploratory and meant for defensive purposes, and not as an intro to
 1337 hax0ring. If you use the knowledge below for bad, don't blame me when the feds' party van comes
@@ -25,8 +30,6 @@ purgatory of the moderation queue. However, one would-be comment was different f
 fake-SEO tripe. This post will examine this particular comment and explore its malicious properties.
 
 *Tl;dr? see the summary at the bottom of this post.*
-
-<!--more-->
 
 ### The raw comment ###
 
