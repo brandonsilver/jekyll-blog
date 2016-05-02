@@ -1,0 +1,53 @@
+---
+layout: default
+weight: 0
+title: Home
+tags:
+- brandon silver
+- contact
+- email
+- blog
+- gpg key
+---
+
+<div class="mdl-grid">
+     <div class="mdl-cell mdl-cell--4-col">
+         <div class="mdl-card mdl-shadow--2dp">
+             <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text mdl-card--expand">Recent Posts</h2>
+             </div>
+             <div class="mdl-card__supporting-text">
+                <p>
+                  {% for post in site.posts limit:5 %}
+                    <li>{{ post.date | date_to_string }} &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+                  {% endfor %}
+                </p>
+             </div>
+         </div>
+     </div>
+     <div class="mdl-cell mdl-cell--4-col">
+         <div class="mdl-card mdl-shadow--2dp">
+             <div class="mdl-card__title">
+                 <h2 class="mdl-card__title-text">About Me</h2>
+             </div>
+             <div class="mdl-card__supporting-text">
+                Hello there! I'm a graduate of Computer Science from Oklahoma State University. My interests these
+                days are mostly centered around exploring the wide world of IT, with some casual
+                <a href="http://www.flickr.com/photos/silverimaging/">photography</a> and video gaming thrown into the mix.
+             </div>
+         </div>        
+     </div>
+      <div class="mdl-cell mdl-cell--4-col">
+          <div class="mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text">Contact Info</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                  <p>
+                    <li><strong>Email:</strong> <a href="mailto:brandon@brandonsilver.com">brandon@brandonsilver.com</a></li>
+                    <li><strong>PGP Key ID:</strong> <code>8D5F182D</code> </li>
+                  </p>
+              </div>
+          </div>
+      </div>
+</div>
