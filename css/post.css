@@ -43,7 +43,13 @@
   margin-bottom: 80px;
 }
 
+/*
 .post-layout.is-small-screen .post-content {
+  padding: 40px 28px;
+}
+*/
+
+.mdl-layout.is-small-screen .post-content {
   padding: 40px 28px;
 }
 
@@ -57,4 +63,8 @@
 
 .post-footer .mdl-mini-footer--link-list a {
   font-size: 13px;
+}
+
+#disqus_thread {
+    padding-top: 15px;
 }
