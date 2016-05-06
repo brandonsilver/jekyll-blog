@@ -8,6 +8,10 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.mdl-layout__title {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 /*
 h2 {
     font-size: 34px;
@@ -18,7 +22,6 @@ h3 {
 */
 .text-content {
     font-family: 'Merriweather', serif;
-    font-weight: 300;
     font-size: 16px;
     line-height: 1.6em;
 }
