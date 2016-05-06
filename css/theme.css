@@ -78,9 +78,13 @@ pre {
 
 code {
 	font-family: "Courier New", Courier, monospace
-    font-size: 0.9em;
 }
 
 figure {
     margin-bottom: 10px;
+}
+
+.highlight {
+    font-size: 12px;
+    line-height: 1.0em;
 }
