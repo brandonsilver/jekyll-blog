@@ -1,56 +1,15 @@
 body {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 14px;
     background-color: #efefef;
 }
 
-.mdl-layout {
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-.mdl-layout__title {
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-/*
-h2 {
-    font-size: 34px;
-}
-h3 {
-    font-size: 26px;
-}
-*/
 .text-content {
+    /*
     font-family: 'Source Serif Pro', serif;
     font-size: 16px;
+    */
     line-height: 1.6em;
 }
 
-.text-content small {
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-.text-content h1,h2,h3,h4 {
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-
-.text-content h4 {
-/*    font-size: 20px; */
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-.text-content p {
-    margin-top: 10px;
-    margin-bottom: 10px; 
-    /*color: #424242; */
-    font-size: 17px;
-}
-
-.text-content li {
-    font-size: 17px;
-}
 
 #disqus_thread {
 	background: #FFFFFF;
@@ -60,11 +19,6 @@ h3 {
 	color: #808080;
 }
 
-/*
-h2.post {
-    margin-top: 5px;
-}
-*/
 #clear {
 	display: block;
 	clear: both;
@@ -86,7 +40,7 @@ pre {
 
 code {
 	/*font-family: "Courier New", Courier, monospace */
-    font-family: 'Source Code Pro';
+    /* font-family: 'Source Code Pro'; */
 }
 
 figure {
@@ -94,6 +48,6 @@ figure {
 }
 
 .highlight {
-    font-size: 12px;
+    /* font-size: 12px; */
     line-height: 1.0em;
 }
