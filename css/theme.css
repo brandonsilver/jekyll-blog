@@ -51,3 +51,7 @@ figure {
     /* font-size: 12px; */
     line-height: 1.0em;
 }
+
+.mdl-card__supporting-text p {
+    line-height: 18px;
+}
